@@ -94,8 +94,8 @@ public class LeaderboardEntry {
         private int leaderboardScore(List<Result> results) {
             Duration leaderboardTime = leaderboardTime(results);
             long seconds = leaderboardTime.getSeconds();
-            double scaled0to1 = (double) seconds / 7200 - 0.5;
-            double sigmoided = 2 / (1+Math.exp(4 * scaled0to1));
+            double scaled = (double) seconds / 6900 - 13.0/23.0; // 1:05 -> 0, 3:00 -> 1
+            double sigmoided = 2 / (1+Math.exp(4 * scaled));
             return (int) Math.round(sigmoided * 1000);
         }
 
