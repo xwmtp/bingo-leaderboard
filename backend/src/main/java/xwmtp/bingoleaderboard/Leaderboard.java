@@ -28,4 +28,8 @@ public class Leaderboard {
         }
         return string.toString();
     }
+
+    public List<LeaderboardEntry> getLeaderboard() {
+        return leaderboard;
+    }
 }

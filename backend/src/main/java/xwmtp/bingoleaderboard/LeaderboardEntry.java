@@ -14,26 +14,22 @@ import java.util.stream.Collectors;
 import static xwmtp.bingoleaderboard.DurationsUtil.formatDuration;
 
 public class LeaderboardEntry {
+
     private final String playerName;
-    private final int points;
+    private final int racetimePoints;
     private final int leaderboardScore;
-    private final Duration leaderboardTime;
-    private final Duration effectiveMedian;
-    private final Duration average;
-    private final Instant lastRaced;
+    private final String leaderboardTime;
+    private final String effectiveMedian;
+    private final String average;
+    private final String lastRaced;
     private final int finishedRacesCount;
     private final int includedRacesCount;
 
-    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-            .withLocale(Locale.US)
-            .withZone(ZoneId.of("UTC"));
-
-
-    public LeaderboardEntry(String playerName, int points, int leaderboardScore, Duration leaderboardTime,
-                            Duration effectiveMedian, Duration average, Instant lastRaced,
+    public LeaderboardEntry(String playerName, int points, int leaderboardScore, String leaderboardTime,
+                            String effectiveMedian, String average, String lastRaced,
                             int finishedRacesCount, int includedRacesCount) {
         this.playerName = playerName;
-        this.points = points;
+        this.racetimePoints = points;
         this.leaderboardScore = leaderboardScore;
         this.leaderboardTime = leaderboardTime;
         this.effectiveMedian = effectiveMedian;
@@ -42,32 +38,68 @@ public class LeaderboardEntry {
         this.finishedRacesCount = finishedRacesCount;
         this.includedRacesCount = includedRacesCount;
     }
-
-    public Duration getLeaderboardTime() {
-        return leaderboardTime;
-    }
-
     @Override
     public String toString() {
         return String.format("%s | %s | %s | %s | %s | %s | %s | %s/%s",
                 playerName,
                 leaderboardScore,
-                formatDuration(leaderboardTime),
-                formatDuration(effectiveMedian),
-                formatDuration(average),
-                points,
-                dateFormatter.format(lastRaced),
+                leaderboardTime,
+                effectiveMedian,
+                average,
+                racetimePoints,
+                lastRaced,
                 finishedRacesCount,
                 includedRacesCount
         );
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public int getRacetimePoints() {
+        return racetimePoints;
+    }
+
+    public String getLeaderboardTime() {
+        return leaderboardTime;
+    }
+
+
+    public int getLeaderboardScore() {
+        return leaderboardScore;
+    }
+
+    public String getEffectiveMedian() {
+        return effectiveMedian;
+    }
+
+    public String getAverage() {
+        return average;
+    }
+
+    public String getLastRaced() {
+        return lastRaced;
+    }
+
+    public int getFinishedRacesCount() {
+        return finishedRacesCount;
+    }
+
+    public int getIncludedRacesCount() {
+        return includedRacesCount;
+    }
+
+
+
     public static LeaderboardEntryBuilder builder(int dropResults) {
         return new LeaderboardEntryBuilder(dropResults);
     }
 
-
     public static class LeaderboardEntryBuilder {
+        private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+                .withLocale(Locale.US)
+                .withZone(ZoneId.of("UTC"));
         private final int DROP_RESULTS;
 
         public LeaderboardEntryBuilder(int dropResults) {
@@ -82,10 +114,10 @@ public class LeaderboardEntry {
                     player.getName(),
                     player.getPoints(),
                     leaderboardScore(results),
-                    leaderboardTime(results),
-                    effectiveMedian(results),
-                    average(results),
-                    lastRaced(results),
+                    formatDuration(leaderboardTime(results)),
+                    formatDuration(effectiveMedian(results)),
+                    formatDuration(average(results)),
+                    dateFormatter.format(lastRaced(results)),
                     player.getFinishedRacesCount(),
                     results.size()
                     );
