@@ -1,16 +1,18 @@
 package xwmtp.bingoleaderboard;
 
-import xwmtp.bingoleaderboard.racetime.DownloadData;
+import xwmtp.bingoleaderboard.data.Player;
+import xwmtp.bingoleaderboard.data.racetime.DownloadData;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Leaderboard {
     private final DownloadData downloadData = new DownloadData();
+    private List<Player> players = new ArrayList<>();
     private List<LeaderboardEntry> leaderboard = new ArrayList<>();
 
     public void constructLeaderboard(int maxResults, int dropResults) {
-        List<Player> players = downloadData.downloadPlayers(maxResults, -1);
+        players = downloadData.downloadPlayers(maxResults, 5);
         System.out.println(DownloadData.getApiCalls() + " api calls made.");
         final LeaderboardEntry.LeaderboardEntryBuilder entryBuilder = LeaderboardEntry.builder(dropResults);
         leaderboard = players.stream()
@@ -34,5 +36,9 @@ public class Leaderboard {
 
     public List<LeaderboardEntry> getLeaderboard() {
         return leaderboard;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 }

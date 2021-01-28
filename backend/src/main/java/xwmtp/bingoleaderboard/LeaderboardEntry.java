@@ -1,5 +1,8 @@
 package xwmtp.bingoleaderboard;
 
+import xwmtp.bingoleaderboard.data.Player;
+import xwmtp.bingoleaderboard.data.Result;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -141,7 +144,7 @@ public class LeaderboardEntry {
             final List<Result> topResults = dropWorstRaces(results);
             final Duration forfeitTime = forfeitTime(topResults);
             final List<Duration> times = topResults.stream()
-                    .map(r -> r.isForfeit() ? forfeitTime : r.getTimePenalizedByAge())
+                    .map(r -> r.isForfeit() ? forfeitTime : r.timePenalizedByAge())
                     .collect(Collectors.toList());
             return DurationsUtil.average(times);
         }

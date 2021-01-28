@@ -1,4 +1,4 @@
-package xwmtp.bingoleaderboard.racetime.model.race;
+package xwmtp.bingoleaderboard.data.racetime.model.race;
 
 import java.time.Instant;
 import java.util.ArrayList;

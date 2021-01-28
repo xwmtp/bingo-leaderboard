@@ -1,4 +1,4 @@
-package xwmtp.bingoleaderboard.racetime.model;
+package xwmtp.bingoleaderboard.data.racetime.model;
 
 public class RacetimeUser {
     private String id = "";

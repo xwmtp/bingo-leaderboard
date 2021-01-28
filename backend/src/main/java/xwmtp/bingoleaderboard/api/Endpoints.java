@@ -1,9 +1,11 @@
 package xwmtp.bingoleaderboard.api;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import xwmtp.bingoleaderboard.Leaderboard;
 import xwmtp.bingoleaderboard.LeaderboardEntry;
+import xwmtp.bingoleaderboard.data.Player;
 
 import java.util.List;
 
@@ -20,13 +22,23 @@ public class Endpoints {
         //System.out.println(leaderboard);
     }
 
-    @RequestMapping("/api")
+    @GetMapping("/api")
     public String index() {
         return "Bingo Leaderboard backend";
     }
 
-    @RequestMapping("api/leaderboard")
+    @GetMapping("api/leaderboard")
     public List<LeaderboardEntry> leaderboard() {
         return leaderboard.getLeaderboard();
     }
+
+    @GetMapping("api/player/{name}")
+    public Player player(@PathVariable("name") String name) {
+        Player player = leaderboard.getPlayers().stream()
+                .filter(e -> e.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
+        return player;
+    }
 }
+

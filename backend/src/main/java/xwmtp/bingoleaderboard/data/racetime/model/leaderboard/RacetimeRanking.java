@@ -1,6 +1,6 @@
-package xwmtp.bingoleaderboard.racetime.model.leaderboard;
+package xwmtp.bingoleaderboard.data.racetime.model.leaderboard;
 
-import xwmtp.bingoleaderboard.racetime.model.RacetimeUser;
+import xwmtp.bingoleaderboard.data.racetime.model.RacetimeUser;
 
 public class RacetimeRanking {
     private int score = 0;

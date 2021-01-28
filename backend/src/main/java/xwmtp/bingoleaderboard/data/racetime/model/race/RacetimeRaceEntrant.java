@@ -1,10 +1,10 @@
-package xwmtp.bingoleaderboard.racetime.model.race;
+package xwmtp.bingoleaderboard.data.racetime.model.race;
 
-import xwmtp.bingoleaderboard.racetime.model.RacetimeUser;
+import xwmtp.bingoleaderboard.data.racetime.model.RacetimeUser;
 
 import java.time.Duration;
 
-import static xwmtp.bingoleaderboard.racetime.model.race.RacetimeEntrantStatus.RacetimeEntrantStatusOption.*;
+import static xwmtp.bingoleaderboard.data.racetime.model.race.RacetimeEntrantStatus.RacetimeEntrantStatusOption.*;
 
 public class RacetimeRaceEntrant {
 

@@ -1,16 +1,16 @@
-package xwmtp.bingoleaderboard.racetime;
+package xwmtp.bingoleaderboard.data.racetime;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import xwmtp.bingoleaderboard.DurationsUtil;
-import xwmtp.bingoleaderboard.Player;
-import xwmtp.bingoleaderboard.Result;
-import xwmtp.bingoleaderboard.racetime.model.leaderboard.RacetimeLeaderboard;
-import xwmtp.bingoleaderboard.racetime.model.leaderboard.RacetimeLeaderboardPage;
-import xwmtp.bingoleaderboard.racetime.model.leaderboard.RacetimeRanking;
-import xwmtp.bingoleaderboard.racetime.model.race.RacetimeRacesPage;
+import xwmtp.bingoleaderboard.data.Player;
+import xwmtp.bingoleaderboard.data.Result;
+import xwmtp.bingoleaderboard.data.racetime.model.leaderboard.RacetimeLeaderboard;
+import xwmtp.bingoleaderboard.data.racetime.model.leaderboard.RacetimeLeaderboardPage;
+import xwmtp.bingoleaderboard.data.racetime.model.leaderboard.RacetimeRanking;
+import xwmtp.bingoleaderboard.data.racetime.model.race.RacetimeRacesPage;
 
 import java.io.IOException;
 import java.net.URI;
@@ -19,9 +19,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 

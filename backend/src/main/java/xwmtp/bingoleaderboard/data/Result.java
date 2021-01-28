@@ -1,13 +1,13 @@
-package xwmtp.bingoleaderboard;
+package xwmtp.bingoleaderboard.data;
 
-import xwmtp.bingoleaderboard.racetime.model.race.RacetimeRace;
-import xwmtp.bingoleaderboard.racetime.model.race.RacetimeRaceEntrant;
+import xwmtp.bingoleaderboard.data.racetime.model.race.RacetimeRace;
+import xwmtp.bingoleaderboard.data.racetime.model.race.RacetimeRaceEntrant;
 
 import java.time.Duration;
 import java.time.Instant;
 
 import static java.time.temporal.ChronoUnit.DAYS;
-import static xwmtp.bingoleaderboard.racetime.model.race.RacetimeEntrantStatus.RacetimeEntrantStatusOption.dnf;
+import static xwmtp.bingoleaderboard.data.racetime.model.race.RacetimeEntrantStatus.RacetimeEntrantStatusOption.dnf;
 
 public class Result {
     private final String entrantName;
@@ -31,7 +31,7 @@ public class Result {
         entrantId = entrant.getUser().getId();
     }
 
-    public Duration getTimePenalizedByAge() {
+    public Duration timePenalizedByAge() {
         final int age = (int) Math.max(date.until(Instant.now(), DAYS), 0);
         final int penaltyFactor10000 = agePenaltyFactorx10000(age);
         return time.multipliedBy(penaltyFactor10000).dividedBy(10000);

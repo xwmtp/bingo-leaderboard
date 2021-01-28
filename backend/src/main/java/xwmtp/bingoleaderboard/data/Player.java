@@ -1,9 +1,9 @@
-package xwmtp.bingoleaderboard;
+package xwmtp.bingoleaderboard.data;
 
-import xwmtp.bingoleaderboard.racetime.model.leaderboard.RacetimeRanking;
+import xwmtp.bingoleaderboard.data.Result;
+import xwmtp.bingoleaderboard.data.racetime.model.leaderboard.RacetimeRanking;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Player {
 
