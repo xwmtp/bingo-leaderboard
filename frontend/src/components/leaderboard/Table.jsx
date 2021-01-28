@@ -33,42 +33,6 @@ const data = [
         lastRaced: "Jan 16, 2021",
         finishedRacesCount: 14,
         includedRacesCount: 15
-    },
-    {
-        id:3,
-        playerName: "Exodus",
-        racetimePoints: 3341,
-        leaderboardScore: 869,
-        leaderboardTime: "1:12:36",
-        effectiveMedian: "1:12:27",
-        average: "1:11:34",
-        lastRaced: "Jan 23, 2021",
-        finishedRacesCount: 13,
-        includedRacesCount: 15
-    },
-    {
-        id:4,
-        playerName: "Amateseru",
-        racetimePoints: 3399,
-        leaderboardScore: 860,
-        leaderboardTime: "1:13:06",
-        effectiveMedian: "1:11:57",
-        average: "1:12:28",
-        lastRaced: "Nov 28, 2020",
-        finishedRacesCount: 14,
-        includedRacesCount: 15
-    },
-    {
-        id:5,
-        playerName: "tob3000",
-        racetimePoints: 3507,
-        leaderboardScore: 837,
-        leaderboardTime: "1:14:27",
-        effectiveMedian: "1:15:58",
-        average: "1:16:24",
-        lastRaced: "Jan 23, 2021",
-        finishedRacesCount: 15,
-        includedRacesCount: 15
     }
 ]
 
@@ -117,6 +81,8 @@ createTheme('bingo', {
           style: {
             fontSize: '15px',
             justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '40px',
           }
           
       }
@@ -126,7 +92,7 @@ createTheme('bingo', {
 const columns = [
     {
         name: 'Rank',
-        selector: 'id',
+        selector: 'rank',
         sortable: true,
         width: '60px',
         center: true,
@@ -136,7 +102,7 @@ const columns = [
         name: 'Name',
         selector: 'playerName',
         sortable: true,
-        minWidth: '150px',
+        minWidth: '170px',
         center: true,
     },
     {
@@ -155,19 +121,24 @@ const columns = [
     },
 ];
 
+const rowClicked = (row) => {
+    console.log(row);
+}
 
-function Table() {
-
-    
+function Table(props) {
+    console.log(props.data)
     return (
         <TableDiv >
             <DataTable
                 title="Leaderboard"
                 columns={columns}
-                data={data}
+                data={props.data}
                 theme='bingo'
                 customStyles={customStyles}
                 noHeader='true'
+                noDataComponent={<></>}
+                onRowClicked={rowClicked}
+                pointerOnHover={true}
 
             />
         </TableDiv>

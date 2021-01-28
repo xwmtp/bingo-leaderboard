@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 
 const HeaderDiv = styled.div`
-    height: 200px;
+    height: 150px;
     width: 100%;
     display: flex;
     flex-direction: column;

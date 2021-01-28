@@ -10,14 +10,17 @@ public class Leaderboard {
     private List<LeaderboardEntry> leaderboard = new ArrayList<>();
 
     public void constructLeaderboard(int maxResults, int dropResults) {
-        List<Player> players = downloadData.downloadPlayers(maxResults);
-        System.out.println(downloadData.apiCalls + " api calls!");
+        List<Player> players = downloadData.downloadPlayers(maxResults, -1);
+        System.out.println(DownloadData.getApiCalls() + " api calls made.");
         final LeaderboardEntry.LeaderboardEntryBuilder entryBuilder = LeaderboardEntry.builder(dropResults);
         leaderboard = players.stream()
                 .filter(r -> r.getFinishedRacesCount() > 0)
                 .map(entryBuilder::buildLeaderboardEntry)
                 .sorted(Comparator.comparing(LeaderboardEntry::getLeaderboardTime))
                 .collect(Collectors.toList());
+        for (int i = 0; i < leaderboard.size(); i++) {
+            leaderboard.get(i).setRank(i + 1);
+        }
     }
 
     @Override

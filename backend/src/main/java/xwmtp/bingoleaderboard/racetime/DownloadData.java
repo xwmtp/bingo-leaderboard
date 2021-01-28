@@ -23,7 +23,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DownloadData {
@@ -36,23 +35,29 @@ public class DownloadData {
             .registerTypeAdapter(Instant.class, instantDeserializer)
             .registerTypeAdapter(Duration.class, durationDeserializer)
             .create();
-    public static int apiCalls = 0;
+    private static int apiCalls = 0;
 
-    public List<Player> downloadPlayers(int maxResults) {
+    public List<Player> downloadPlayers(int maxResults, int limit) {
         RacetimeLeaderboard leaderboard = downloadRacetimeLeaderboard();
+        if (limit < 0) {
+            limit = leaderboard.getRankings().size();
+        }
         List<Player> players = new ArrayList<>();
         List<RacetimeRanking> rankings = leaderboard.getRankings().stream()
-                .limit(5)
+                .limit(limit)
                 .collect(Collectors.toList());
         for (RacetimeRanking ranking : rankings) {
             System.out.println(ranking.getUser().getName());
             List<Result> results = downloadRacetimeResults(ranking, maxResults);
-            System.out.println(results.size());
             System.out.println(results.stream().map(r-> DurationsUtil.formatDuration(r.getTime())).collect(Collectors.toList()));
-            System.out.println();
+            System.out.println(results.size() + "\n");
             players.add(new Player(ranking, results));
         }
         return players;
+    }
+
+    public List<Player> downloadPlayers(int maxResults) {
+        return downloadPlayers(maxResults, -1);
     }
 
     private List<Result> downloadRacetimeResults(RacetimeRanking ranking, int maxResults) {
@@ -91,7 +96,6 @@ public class DownloadData {
         }
     }
 
-
     private RacetimeLeaderboard downloadRacetimeLeaderboard() {
         try {
             String racetimeLeaderboardData = getRequest("https://racetime.gg/oot/leaderboards/data");
@@ -128,4 +132,7 @@ public class DownloadData {
         }
     }
 
+    public static int getApiCalls() {
+        return apiCalls;
+    }
 }

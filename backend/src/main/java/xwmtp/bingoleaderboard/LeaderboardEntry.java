@@ -15,6 +15,7 @@ import static xwmtp.bingoleaderboard.DurationsUtil.formatDuration;
 
 public class LeaderboardEntry {
 
+    private int rank;
     private final String playerName;
     private final int racetimePoints;
     private final int leaderboardScore;
@@ -38,6 +39,11 @@ public class LeaderboardEntry {
         this.finishedRacesCount = finishedRacesCount;
         this.includedRacesCount = includedRacesCount;
     }
+
+    public static LeaderboardEntryBuilder builder(int dropResults) {
+        return new LeaderboardEntryBuilder(dropResults);
+    }
+
     @Override
     public String toString() {
         return String.format("%s | %s | %s | %s | %s | %s | %s | %s/%s",
@@ -53,6 +59,14 @@ public class LeaderboardEntry {
         );
     }
 
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
     public String getPlayerName() {
         return playerName;
     }
@@ -64,7 +78,6 @@ public class LeaderboardEntry {
     public String getLeaderboardTime() {
         return leaderboardTime;
     }
-
 
     public int getLeaderboardScore() {
         return leaderboardScore;
@@ -90,12 +103,6 @@ public class LeaderboardEntry {
         return includedRacesCount;
     }
 
-
-
-    public static LeaderboardEntryBuilder builder(int dropResults) {
-        return new LeaderboardEntryBuilder(dropResults);
-    }
-
     public static class LeaderboardEntryBuilder {
         private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
                 .withLocale(Locale.US)
@@ -108,8 +115,6 @@ public class LeaderboardEntry {
 
         public LeaderboardEntry buildLeaderboardEntry(Player player) {
             List<Result> results = player.getResults();
-            System.out.println(player.getName());
-            System.out.println(results.stream().map(Result::getTime).collect(Collectors.toList()));
             return new LeaderboardEntry(
                     player.getName(),
                     player.getPoints(),
@@ -120,14 +125,14 @@ public class LeaderboardEntry {
                     dateFormatter.format(lastRaced(results)),
                     player.getFinishedRacesCount(),
                     results.size()
-                    );
+            );
         }
 
         private int leaderboardScore(List<Result> results) {
             Duration leaderboardTime = leaderboardTime(results);
             long seconds = leaderboardTime.getSeconds();
-            double scaled = (double) seconds / 6900 - 13.0/23.0; // 1:05 -> 0, 3:00 -> 1
-            double sigmoided = 2 / (1+Math.exp(4 * scaled));
+            double scaled = (double) seconds / 6900 - 13.0 / 23.0; // 1:05 -> 0, 3:00 -> 1
+            double sigmoided = 2 / (1 + Math.exp(4 * scaled));
             return (int) Math.round(sigmoided * 1000);
         }
 

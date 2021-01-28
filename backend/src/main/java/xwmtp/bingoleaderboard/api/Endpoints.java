@@ -20,12 +20,12 @@ public class Endpoints {
         //System.out.println(leaderboard);
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/api")
     public String index() {
-        return "Bingo Leaderboard api test!";
+        return "Bingo Leaderboard backend";
     }
 
-    @RequestMapping("/leaderboard")
+    @RequestMapping("api/leaderboard")
     public List<LeaderboardEntry> leaderboard() {
         return leaderboard.getLeaderboard();
     }

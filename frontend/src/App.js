@@ -11,10 +11,8 @@ const AppDiv = styled.div`
 function App() {
   return (
     <AppDiv id="app">
-      <div className="App">
         <Header />
         <LeaderboardPage/>
-      </div>
     </AppDiv>
   );
 }
