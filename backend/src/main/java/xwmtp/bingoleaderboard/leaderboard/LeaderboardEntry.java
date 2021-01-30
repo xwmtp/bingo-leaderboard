@@ -16,6 +16,7 @@ public class LeaderboardEntry {
     private final String lastRaced;
     private final int finishedRacesCount;
     private final int includedRacesCount;
+    private final String finishedRacesFraction;
     private int rank;
 
     public LeaderboardEntry(Player player, int dropResults) {
@@ -29,11 +30,12 @@ public class LeaderboardEntry {
         lastRaced = formatDate(player.lastRaced());
         finishedRacesCount = player.getFinishedRacesCount();
         includedRacesCount = player.getResults().size();
+        finishedRacesFraction = String.format("%s/%s", finishedRacesCount, includedRacesCount);
     }
 
     @Override
     public String toString() {
-        return String.format("%s | %s | %s | %s | %s | %s | %s | %s/%s",
+        return String.format("%s | %s | %s | %s | %s | %s | %s | %s",
                 playerName,
                 leaderboardScore,
                 leaderboardTime,
@@ -41,8 +43,7 @@ public class LeaderboardEntry {
                 average,
                 racetimePoints,
                 lastRaced,
-                finishedRacesCount,
-                includedRacesCount
+                finishedRacesFraction
         );
     }
 
@@ -88,6 +89,10 @@ public class LeaderboardEntry {
 
     public int getIncludedRacesCount() {
         return includedRacesCount;
+    }
+
+    public String getFinishedRacesFraction() {
+        return finishedRacesFraction;
     }
 
 }

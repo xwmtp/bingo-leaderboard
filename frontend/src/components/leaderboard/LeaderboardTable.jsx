@@ -1,15 +1,22 @@
 import React from "react";
 import styled from "styled-components";
-import DataTable, {createTheme} from 'react-data-table-component';
+import DataTable, { createTheme } from 'react-data-table-component';
 
-
-const TableDiv = styled.div`
-    height: 50px;
-    background: var(--violet);
-    font-size: 100px;
+const LeaderboardDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 45%;
+    border: solid white 1px;
 `
 
-const data = [
+const TableDiv = styled.div`
+    height: 100%;
+    font-size: 16px;
+    border: solid green 1px;
+`
+
+/*const data = [
     {
         id:1,
         playerName: "Timato",
@@ -34,64 +41,64 @@ const data = [
         finishedRacesCount: 14,
         includedRacesCount: 15
     }
-]
+]*/
 
 createTheme('bingo', {
     text: {
-      primary: `#11111`,
-      secondary: '#2aa198',
+        primary: `#11111`,
+        secondary: '#2aa198',
     },
     background: {
-      default: '#111111',
+        default: '#111111',
     },
     divider: {
-      default: '#46484b',
+        default: '#46484b',
     },
     highlightOnHover: {
         default: '#181818',
         text: '#f7e279',
-      },
+    },
     sortFocus: {
-        default:'#f7e279',
+        default: '#f7e279',
     },
     action: {
-      button: 'rgba(0,0,0,.54)',
-      hover: 'rgba(0,0,0,.08)',
-      disabled: 'rgba(0,0,0,.12)',
+        button: 'rgba(0,0,0,.54)',
+        hover: 'rgba(0,0,0,.08)',
+        disabled: 'rgba(0,0,0,.12)',
     },
-  });
+});
 
-  const customStyles = {
-      header : {
-          style: {
-              justifyContent: 'center',
-          }
-      },
-      headCells: {
-          style: {
+const customStyles = {
+    header: {
+        style: {
+            justifyContent: 'center',
+        }
+    },
+    headCells: {
+        style: {
             fontSize: '15px',
             fontWeight: 'bold',
             color: '#f7e279',
             justifyContent: 'center',
             paddingLeft: '35px',
-          }
-          
-      },
-      rows: {
-          style: {
+        }
+
+    },
+    rows: {
+        style: {
             fontSize: '15px',
             justifyContent: 'center',
             alignItems: 'center',
             minHeight: '40px',
-          }
-          
-      }
-  }
+        }
+
+    }
+}
 
 
 const columns = [
     {
-        name: 'Rank',
+        name: 'time',
         selector: 'rank',
         sortable: true,
         width: '60px',
@@ -117,7 +124,12 @@ const columns = [
         selector: 'average',
         sortable: true,
         center: true,
-
+    },
+    {
+        name: 'Finished',
+        selector: 'finishedRacesFraction',
+        sortable: false,
+        center: true,
     },
 ];
 
@@ -125,24 +137,26 @@ const rowClicked = (row) => {
     console.log(row);
 }
 
-function Table(props) {
+function LeaderboardTable(props) {
+    console.log("In leaderboard table:")
     console.log(props.data)
     return (
-        <TableDiv >
-            <DataTable
-                title="Leaderboard"
-                columns={columns}
-                data={props.data}
-                theme='bingo'
-                customStyles={customStyles}
-                noHeader='true'
-                noDataComponent={<></>}
-                onRowClicked={rowClicked}
-                pointerOnHover={true}
-
-            />
-        </TableDiv>
+        <LeaderboardDiv id="leaderboard-div">
+            <TableDiv id="leaderboard-table">
+                <DataTable
+                    title="Leaderboard"
+                    columns={columns}
+                    data={props.data}
+                    theme='bingo'
+                    customStyles={customStyles}
+                    noHeader='true'
+                    noDataComponent={<p>No data available.</p>}
+                    onRowClicked={rowClicked}
+                    pointerOnHover={true}
+                />
+            </TableDiv>
+        </LeaderboardDiv>
     );
 }
 
-export default Table;
+export default LeaderboardTable;
