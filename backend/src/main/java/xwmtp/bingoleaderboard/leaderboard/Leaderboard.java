@@ -1,4 +1,4 @@
-package xwmtp.bingoleaderboard;
+package xwmtp.bingoleaderboard.leaderboard;
 
 import xwmtp.bingoleaderboard.data.Player;
 import xwmtp.bingoleaderboard.data.racetime.DownloadData;
@@ -8,18 +8,20 @@ import java.util.stream.Collectors;
 
 public class Leaderboard {
     private final DownloadData downloadData = new DownloadData();
-    private List<Player> players = new ArrayList<>();
+    private List<LeaderboardPlayer> players = new ArrayList<>();
     private List<LeaderboardEntry> leaderboard = new ArrayList<>();
 
     public void constructLeaderboard(int maxResults, int dropResults) {
-        players = downloadData.downloadPlayers(maxResults, 5);
+        List<Player> downloadedPlayers = downloadData.downloadPlayers(maxResults, 3);
         System.out.println(DownloadData.getApiCalls() + " api calls made.");
-        final LeaderboardEntry.LeaderboardEntryBuilder entryBuilder = LeaderboardEntry.builder(dropResults);
-        leaderboard = players.stream()
-                .filter(r -> r.getFinishedRacesCount() > 0)
-                .map(entryBuilder::buildLeaderboardEntry)
+        leaderboard = downloadedPlayers.stream()
+                .filter(p -> p.getFinishedRacesCount() > 0)
+                .map(p -> new LeaderboardEntry(p, dropResults))
                 .sorted(Comparator.comparing(LeaderboardEntry::getLeaderboardTime))
                 .collect(Collectors.toList());
+        players = downloadedPlayers.stream()
+                .map(p -> new LeaderboardPlayer(p, dropResults))
+                .collect(Collectors.toList());;
         for (int i = 0; i < leaderboard.size(); i++) {
             leaderboard.get(i).setRank(i + 1);
         }
@@ -38,7 +40,7 @@ public class Leaderboard {
         return leaderboard;
     }
 
-    public List<Player> getPlayers() {
+    public List<LeaderboardPlayer> getPlayers() {
         return players;
     }
 }

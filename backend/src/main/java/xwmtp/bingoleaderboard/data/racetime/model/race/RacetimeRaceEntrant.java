@@ -11,6 +11,7 @@ public class RacetimeRaceEntrant {
     private RacetimeUser user = new RacetimeUser();
     private Duration finishTime = null;
     private RacetimeEntrantStatus status = new RacetimeEntrantStatus();
+    private String comment = "";
 
     public RacetimeUser getUser() {
         return user;
@@ -26,5 +27,9 @@ public class RacetimeRaceEntrant {
 
     public boolean hasValidFinish() {
         return status.getValue() == done || status.getValue() == dnf;
+    }
+
+    public String getComment() {
+        return comment;
     }
 }

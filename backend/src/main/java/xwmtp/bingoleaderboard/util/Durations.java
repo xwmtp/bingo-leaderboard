@@ -1,10 +1,10 @@
-package xwmtp.bingoleaderboard;
+package xwmtp.bingoleaderboard.util;
 
 import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 
-public class DurationsUtil {
+public class Durations {
 
     public static Duration average(List<Duration> durations) {
         if (durations.isEmpty()) {

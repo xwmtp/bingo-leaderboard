@@ -4,7 +4,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
-import xwmtp.bingoleaderboard.DurationsUtil;
+import xwmtp.bingoleaderboard.util.Durations;
 import xwmtp.bingoleaderboard.data.Player;
 import xwmtp.bingoleaderboard.data.Result;
 import xwmtp.bingoleaderboard.data.racetime.model.leaderboard.RacetimeLeaderboard;
@@ -47,7 +47,7 @@ public class DownloadData {
         for (RacetimeRanking ranking : rankings) {
             System.out.println(ranking.getUser().getName());
             List<Result> results = downloadRacetimeResults(ranking, maxResults);
-            System.out.println(results.stream().map(r-> DurationsUtil.formatDuration(r.getTime())).collect(Collectors.toList()));
+            System.out.println(results.stream().map(r-> Durations.formatDuration(r.getTime())).collect(Collectors.toList()));
             System.out.println(results.size() + "\n");
             players.add(new Player(ranking, results));
         }

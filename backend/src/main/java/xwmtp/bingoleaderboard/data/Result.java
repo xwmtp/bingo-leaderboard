@@ -15,6 +15,7 @@ public class Result {
     private final Instant date;
     private final Duration time;
     private final boolean forfeit;
+    private final String comment;
 
     public Result(RacetimeRace race, String userId) {
         RacetimeRaceEntrant entrant = race.getEntrants().stream()
@@ -29,12 +30,13 @@ public class Result {
         forfeit = entrant.getStatus().getValue() == dnf;
         entrantName = entrant.getUser().getName();
         entrantId = entrant.getUser().getId();
+        comment = entrant.getComment();
     }
 
     public Duration timePenalizedByAge() {
         final int age = (int) Math.max(date.until(Instant.now(), DAYS), 0);
         final int penaltyFactor10000 = agePenaltyFactorx10000(age);
-        return time.multipliedBy(penaltyFactor10000).dividedBy(10000);
+        return getTime().multipliedBy(penaltyFactor10000).dividedBy(10000);
     }
 
     private int agePenaltyFactorx10000(int days) {
@@ -42,7 +44,7 @@ public class Result {
         final double threshold = 60.0;
         final double maxFactor = 1.2;
 
-        final double base = 1 - (oneYearFactor - 1) * 30 / (365 - threshold);
+        final double base = 1 - (oneYearFactor - 1) * threshold / (365 - threshold);
         final double intercept = (oneYearFactor - 1) / (365 - threshold);
         double penaltyFactor = base + (double) days * intercept;
 
@@ -70,4 +72,7 @@ public class Result {
         return forfeit;
     }
 
+    public String getComment() {
+        return comment;
+    }
 }
