@@ -2,21 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import DataTable from 'react-data-table-component';
 
-const PlayerDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 45%;
-    border: solid red 1px;
-`
 
 const TableDiv = styled.div`
     height: 100%;
     font-size: 16px;
+    //border: 1px solid yellow;
 `
-
-
-
 const customStyles = {
     header: {
         style: {
@@ -49,6 +40,7 @@ const columns = [
     {
         name: 'Time',
         selector: 'time',
+        width: '100px',
         sortable: true,
         center: true,
 
@@ -56,6 +48,7 @@ const columns = [
     {
         name: 'Aged',
         selector: 'agedTime',
+        width: '100px',
         sortable: true,
         center: true,
     },
@@ -63,8 +56,16 @@ const columns = [
         name: 'Date',
         selector: 'date',
         sortable: true,
-        minWidth: '130px',
+        width: '130px',
         right: true,
+
+    },
+    {
+        name: 'Comment',
+        selector: 'comment',
+        sortable: false,
+        maxWidth: '180px',
+        left: true,
 
     },
 ];
@@ -81,26 +82,21 @@ const conditionalRowStyles = [
 function PlayerTable(props) {
     console.log("In player table:")
     console.log(props.data)
-    const name = props.data.name === undefined ? "" : props.data.name;
     return (
-        <PlayerDiv>
-            <h2>
-                {name}
-            </h2>
-            <TableDiv >
-                <DataTable
-                    title="Leaderboard"
-                    columns={columns}
-                    data={props.data.results}
-                    theme='bingo'
-                    customStyles={customStyles}
-                    conditionalRowStyles={conditionalRowStyles}
-                    noHeader='true'
-                    noDataComponent={<p>No data available.</p>}
-                    pointerOnHover={true}
-                />
-            </TableDiv>
-        </PlayerDiv>
+        <TableDiv >
+            <DataTable
+                title="Leaderboard"
+                columns={columns}
+                data={props.data.results}
+                theme='bingo'
+                customStyles={customStyles}
+                conditionalRowStyles={conditionalRowStyles}
+                noHeader='true'
+                noDataComponent={<p>Click on a leaderboard row to display player info.</p>}
+                pointerOnHover={true}
+            />
+        </TableDiv>
+
     );
 }
 

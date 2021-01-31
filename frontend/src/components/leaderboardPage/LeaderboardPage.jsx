@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
-import LeaderboardTable from "./LeaderboardTable";
-import PlayerTable from "./PlayerTable";
+import LeaderboardBlock from "./leaderboard/LeaderboardBlock";
+import PlayerBlock from "./player/PlayerBlock";
 import "./TableTheme.js";
 
 class LeaderboardPage extends React.Component {
@@ -23,7 +23,7 @@ class LeaderboardPage extends React.Component {
         display: flex;
         flex-grow: 1;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: center;
     `
 
     requestLeaderboardData() {
@@ -79,12 +79,12 @@ class LeaderboardPage extends React.Component {
             console.log(this.state.playerData)
             playerTableData = this.state.playerData.find(p => p.name === this.state.currentPlayer)
         } else {
-            playerTableData = { name: "", results: [] }
+            playerTableData = { name: "", leaderboardEntry: [], results: [] }
         }
         return (
             <this.LeaderboardPageDiv id='leaderboard-page'>
-                <LeaderboardTable data={this.state.leaderboardData} onRowClick={this.updateCurrentPlayer}/>
-                <PlayerTable data={playerTableData}  />
+                <LeaderboardBlock data={this.state.leaderboardData} onRowClick={this.updateCurrentPlayer}/>
+                <PlayerBlock data={playerTableData}  />
             </this.LeaderboardPageDiv>
         );
     }

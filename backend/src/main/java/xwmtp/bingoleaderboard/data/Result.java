@@ -10,6 +10,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 import static xwmtp.bingoleaderboard.data.racetime.model.race.RacetimeEntrantStatus.RacetimeEntrantStatusOption.dnf;
 
 public class Result {
+    private final String slug;
     private final String entrantName;
     private final String entrantId;
     private final Instant date;
@@ -25,6 +26,7 @@ public class Result {
         if (entrant == null) {
             throw new IllegalArgumentException("User id " + userId + "not present in the entrants of race " + race.getName());
         }
+        slug = race.getName();
         date = race.getEndedAt();
         time = entrant.getFinishTime();
         forfeit = entrant.getStatus().getValue() == dnf;
@@ -50,6 +52,10 @@ public class Result {
 
         penaltyFactor = Math.min(Math.max(penaltyFactor, 1), maxFactor);
         return (int) Math.round(penaltyFactor * 10000);
+    }
+
+    public String getSlug() {
+        return slug;
     }
 
     public String getEntrantName() {

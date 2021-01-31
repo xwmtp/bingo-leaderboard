@@ -6,6 +6,7 @@ import xwmtp.bingoleaderboard.util.Durations;
 
 public class LeaderboardResult {
 
+    private final String slug;
     private final String time;
     private final String agedTime;
     private final boolean forfeit;
@@ -14,12 +15,17 @@ public class LeaderboardResult {
     private final boolean dropped;
 
     public LeaderboardResult(Result result, boolean dropped) {
+        slug = result.getSlug();
         date = Date.formatDate(result.getDate());
         forfeit = result.isForfeit();
         time = forfeit? "dnf" : Durations.formatDuration(result.getTime());
         agedTime = forfeit? "dnf" : Durations.formatDuration(result.timePenalizedByAge());
         comment = result.getComment();
         this.dropped = dropped;
+    }
+
+    public String getSlug() {
+        return slug;
     }
 
     public String getDate() {

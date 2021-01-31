@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Header from "./components/Header";
-import LeaderboardPage from "./components/leaderboard/LeaderboardPage";
+import LeaderboardPage from "./components/leaderboardPage/LeaderboardPage";
 
 const AppDiv = styled.div`
   height: 100%;

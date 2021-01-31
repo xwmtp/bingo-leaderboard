@@ -36,6 +36,10 @@ const GlobalStyle = createGlobalStyle`
         color: var(--orange);
     }
 
+    h2 {
+        color: var(--orange);
+    }
+
     #root {
         height: 100%;
     }
