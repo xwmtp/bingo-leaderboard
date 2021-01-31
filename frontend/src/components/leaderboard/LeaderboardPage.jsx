@@ -74,10 +74,10 @@ class LeaderboardPage extends React.Component {
 
     render() {
         let playerTableData;
-        if (this.state.playerData.length > 0 && this.state.currentPlayer != "") {
+        if (this.state.playerData.length > 0 && this.state.currentPlayer !== "") {
             console.log(this.state.currentPlayer)
             console.log(this.state.playerData)
-            playerTableData = this.state.playerData.find(p => p.name == this.state.currentPlayer)
+            playerTableData = this.state.playerData.find(p => p.name === this.state.currentPlayer)
         } else {
             playerTableData = { name: "", results: [] }
         }

@@ -69,6 +69,15 @@ const columns = [
     },
 ];
 
+const conditionalRowStyles = [
+    {
+        when: row => row.dropped,
+        style: {
+            color: 'grey'
+        }
+    }
+]
+
 function PlayerTable(props) {
     console.log("In player table:")
     console.log(props.data)
@@ -85,6 +94,7 @@ function PlayerTable(props) {
                     data={props.data.results}
                     theme='bingo'
                     customStyles={customStyles}
+                    conditionalRowStyles={conditionalRowStyles}
                     noHeader='true'
                     noDataComponent={<p>No data available.</p>}
                     pointerOnHover={true}

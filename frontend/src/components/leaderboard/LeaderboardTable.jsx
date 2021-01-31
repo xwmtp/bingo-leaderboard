@@ -133,9 +133,6 @@ const columns = [
     },
 ];
 
-const rowClicked = (row) => {
-    console.log(row);
-}
 
 function LeaderboardTable(props) {
     console.log("In leaderboard table:")
