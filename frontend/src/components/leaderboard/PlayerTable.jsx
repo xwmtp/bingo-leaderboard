@@ -5,7 +5,7 @@ import DataTable from 'react-data-table-component';
 const PlayerDiv = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     width: 45%;
     border: solid red 1px;
 `
@@ -69,26 +69,24 @@ const columns = [
     },
 ];
 
-
-const rowClicked = (row) => {
-    console.log(row);
-}
-
 function PlayerTable(props) {
     console.log("In player table:")
     console.log(props.data)
+    const name = props.data.name === undefined ? "" : props.data.name;
     return (
         <PlayerDiv>
+            <h2>
+                {name}
+            </h2>
             <TableDiv >
                 <DataTable
                     title="Leaderboard"
                     columns={columns}
-                    data={props.data}
+                    data={props.data.results}
                     theme='bingo'
                     customStyles={customStyles}
                     noHeader='true'
                     noDataComponent={<p>No data available.</p>}
-                    onRowClicked={rowClicked}
                     pointerOnHover={true}
                 />
             </TableDiv>

@@ -5,7 +5,7 @@ import DataTable, { createTheme } from 'react-data-table-component';
 const LeaderboardDiv = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     width: 45%;
     border: solid white 1px;
 `
@@ -151,7 +151,7 @@ function LeaderboardTable(props) {
                     customStyles={customStyles}
                     noHeader='true'
                     noDataComponent={<p>No data available.</p>}
-                    onRowClicked={rowClicked}
+                    onRowClicked={props.onRowClick}
                     pointerOnHover={true}
                 />
             </TableDiv>
