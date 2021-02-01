@@ -12,14 +12,14 @@ public class Leaderboard {
     private List<LeaderboardEntry> leaderboard = new ArrayList<>();
 
     public void constructLeaderboard(int maxResults, int dropResults) {
-        List<Player> downloadedPlayers = downloadData.downloadPlayers(maxResults, 20);
+        List<Player> downloadedPlayers = downloadData.downloadPlayers(maxResults, 5);
         System.out.println(DownloadData.getApiCalls() + " api calls made.");
         players = downloadedPlayers.stream()
+                .filter(p -> p.getFinishedRacesCount() > 0)
                 .map(p -> new LeaderboardPlayer(p, new LeaderboardEntry(p, dropResults), dropResults))
                 .collect(Collectors.toList());
         leaderboard = players.stream()
                 .map(LeaderboardPlayer::getLeaderboardEntry)
-                .filter(p -> p.getFinishedRacesCount() > 0)
                 .sorted(Comparator.comparing(LeaderboardEntry::getLeaderboardTime))
                 .collect(Collectors.toList());
         for (int i = 0; i < leaderboard.size(); i++) {

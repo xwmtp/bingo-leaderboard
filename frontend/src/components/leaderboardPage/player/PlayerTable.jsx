@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import DataTable from 'react-data-table-component';
 
-
 const TableDiv = styled.div`
     height: 100%;
     font-size: 16px;
@@ -56,9 +55,9 @@ const columns = [
         name: 'Date',
         selector: 'date',
         sortable: true,
-        width: '130px',
-        right: true,
-
+        width: '110px',
+        center: true,
+        format: (row, idx) => row.date.split('T')[0]
     },
     {
         name: 'Comment',
@@ -79,6 +78,33 @@ const conditionalRowStyles = [
     }
 ]
 
+const onRowClicked = (row) => {
+    window.open(`https://www.racetime.gg/${row.slug}`)
+}
+
+const customSort = (rows, field, direction) => {
+    console.log("sorting");
+    console.log(rows);
+    console.log(field);
+    console.log(direction);
+    const handleField = row => row[field];
+    console.log(handleField(rows[0]))
+    const newRows = rows.slice(0);
+    if (field === 'm') {
+        return 'm'
+    } else {
+        return newRows.sort((a, b) => {
+            //const val1 = typeof val1 === 'string'? a[field].toLowerCase : 
+            if (a[field] < b[field]) {
+                return direction === "asc"? -1 : 1
+            }
+            if (a[field] > b[field]) {
+                return direction === "asc"? 1 : -1
+            }
+            return 0})
+    }
+}
+
 function PlayerTable(props) {
     console.log("In player table:")
     console.log(props.data)
@@ -91,6 +117,8 @@ function PlayerTable(props) {
                 theme='bingo'
                 customStyles={customStyles}
                 conditionalRowStyles={conditionalRowStyles}
+                onRowClicked={onRowClicked}
+                sortFunction={customSort}
                 noHeader='true'
                 noDataComponent={<p>Click on a leaderboard row to display player info.</p>}
                 pointerOnHover={true}

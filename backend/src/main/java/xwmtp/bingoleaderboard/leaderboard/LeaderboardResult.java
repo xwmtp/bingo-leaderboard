@@ -16,7 +16,7 @@ public class LeaderboardResult {
 
     public LeaderboardResult(Result result, boolean dropped) {
         slug = result.getSlug();
-        date = Date.formatDate(result.getDate());
+        date = result.getDate().toString();
         forfeit = result.isForfeit();
         time = forfeit? "dnf" : Durations.formatDuration(result.getTime());
         agedTime = forfeit? "dnf" : Durations.formatDuration(result.timePenalizedByAge());

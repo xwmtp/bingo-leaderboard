@@ -27,7 +27,7 @@ public class LeaderboardEntry {
         leaderboardTime = formatDuration(player.leaderboardTime(dropResults));
         effectiveMedian = formatDuration(player.effectiveMedian());
         average = formatDuration(player.average());
-        lastRaced = formatDate(player.lastRaced());
+        lastRaced = player.lastRaced().toString();
         finishedRacesCount = player.getFinishedRacesCount();
         includedRacesCount = player.getResults().size();
         finishedRacesFraction = String.format("%s/%s", finishedRacesCount, includedRacesCount);

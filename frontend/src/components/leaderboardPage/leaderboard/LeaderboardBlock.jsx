@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import DataTable from 'react-data-table-component';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+TimeAgo.addDefaultLocale(en);
 
 const LeaderboardDiv = styled.div`
     display: flex;
@@ -45,7 +48,7 @@ const customStyles = {
     }
 }
 
-
+const timeAgo = new TimeAgo('en-US')
 const columns = [
     {
         name: 'Rank',
@@ -61,19 +64,35 @@ const columns = [
         sortable: true,
         minWidth: '170px',
         center: true,
+        sortFunction: (a, b) => {
+            a = a.playerName.toLowerCase();
+            b = b.playerName.toLowerCase();
+            return a === b ? 0 : a > b ? 1 : -1;
+        }
     },
     {
         name: 'Score',
         selector: 'leaderboardScore',
+        width: '60px',
         sortable: true,
         center: true,
 
     },
     {
-        name: 'Average',
-        selector: 'average',
+        name: 'LB time',
+        selector: 'leaderboardTime',
+        width: '90px',
         sortable: true,
         center: true,
+    },
+    {
+        name: 'Last race',
+        selector: 'lastRaced',
+        width: '100px',
+        sortable: true,
+        format: (row, idx) => timeAgo.format(new Date(row.lastRaced)).replace(' ago', ''),
+        hide: 1000,
+        right: true
     },
     {
         name: 'Finished',

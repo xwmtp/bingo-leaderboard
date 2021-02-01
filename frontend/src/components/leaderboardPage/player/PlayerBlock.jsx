@@ -21,6 +21,13 @@ const PlayerDiv = styled.div`
     }
 `
 
+const PlayerInfo = styled.div`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+`
+
 const PlayerStats = styled.div`
     display: flex;
     flex-direction: row;
@@ -33,7 +40,7 @@ const PlayerStats = styled.div`
 
 const PlayerTimes = styled.div`
     display: flex;
-    width: 200px;
+    width: 210px;
     flex-direction: row;
     justify-content: center;
     //border: 1px solid fuchsia;
@@ -51,38 +58,44 @@ const StatColumn = styled.div`
 
 function PlayerBlock(props) {
     console.log(props.data)
-    const playerStats = props.data.name === ""? <></> :
-        <PlayerStats>
-            <PlayerTimes>
-                <StatColumn className="bold">
-                    <p>average time</p>
-                    <p>median time</p>
-                </StatColumn>
-                <StatColumn>
-                    <p>{props.data.leaderboardEntry.average}</p>
-                    <p>{props.data.leaderboardEntry.effectiveMedian}</p>
-                </StatColumn>
-
-            </PlayerTimes>
-            <PlayerTimes>
-                <StatColumn className="bold">
-                    <p>leaderboard score</p>
-                    <p>racetime points</p>
-
-                </StatColumn>
-                <StatColumn className="align-right">
-                    <p>{props.data.leaderboardEntry.leaderboardScore}</p>
-                    <p>{props.data.leaderboardEntry.racetimePoints}</p>
-                </StatColumn>
-            </PlayerTimes>
-        </PlayerStats>
-
-    return (
-        <PlayerDiv id="player-div">
+    const playerInfo = props.data.name === "" ? <></> :
+        <PlayerInfo>
             <h2>
                 {`#${props.data.leaderboardEntry.rank} ${props.data.name}`}
             </h2>
-            {playerStats}
+            <PlayerStats>
+                <PlayerTimes>
+                    <StatColumn className="bold">
+                        <p>average time</p>
+                        <p>median time</p>
+                        <p>leaderboard time</p>
+                    </StatColumn>
+                    <StatColumn>
+                        <p>{props.data.leaderboardEntry.average}</p>
+                        <p>{props.data.leaderboardEntry.effectiveMedian}</p>
+                        <p>{props.data.leaderboardEntry.leaderboardTime}</p>
+                    </StatColumn>
+
+                </PlayerTimes>
+                <PlayerTimes>
+                    <StatColumn className="bold">
+                        <p>leaderboard score</p>
+                        <p>racetime points</p>
+
+                    </StatColumn>
+                    <StatColumn className="align-right">
+                        <p>{props.data.leaderboardEntry.leaderboardScore}</p>
+                        <p>{props.data.leaderboardEntry.racetimePoints}</p>
+                    </StatColumn>
+                </PlayerTimes>
+            </PlayerStats>
+
+        </PlayerInfo>
+
+
+    return (
+        <PlayerDiv id="player-div">
+            {playerInfo}
             <PlayerTable data={props.data} />
         </PlayerDiv>
     );
