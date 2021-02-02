@@ -2,7 +2,6 @@ package xwmtp.bingoleaderboard.leaderboard;
 
 import xwmtp.bingoleaderboard.data.Player;
 
-import static xwmtp.bingoleaderboard.util.Date.formatDate;
 import static xwmtp.bingoleaderboard.util.Durations.formatDuration;
 
 public class LeaderboardEntry {

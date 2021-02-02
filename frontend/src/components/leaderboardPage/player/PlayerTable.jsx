@@ -3,8 +3,8 @@ import styled from "styled-components";
 import DataTable from 'react-data-table-component';
 
 const TableDiv = styled.div`
-    height: 100%;
     font-size: 16px;
+    margin-bottom: 20px;
     //border: 1px solid yellow;
 `
 const customStyles = {

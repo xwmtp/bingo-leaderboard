@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import LeaderboardPage from "./components/leaderboardPage/LeaderboardPage";
 
 const AppDiv = styled.div`
@@ -13,6 +14,7 @@ function App() {
     <AppDiv id="app">
         <Header />
         <LeaderboardPage/>
+        <Footer/>
     </AppDiv>
   );
 }

@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Roboto', Helvetica, Arial, sans-serif;
     }
     p {
-        text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
+        //text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
     }
 
 
@@ -42,6 +42,48 @@ const GlobalStyle = createGlobalStyle`
 
     #root {
         height: 100%;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 200px;
+        background-color: var(--text-color);
+        color: black;
+        font-weight: normal;
+        font-size: 13px;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        top: 150%;
+        left: 50%;
+        margin-left: -100px;
+    }
+
+    .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent var(--text-color) transparent;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+
+    .tooltiptextheader {
+        font-weight: bold;
     }
 
 `;

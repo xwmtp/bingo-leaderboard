@@ -12,7 +12,7 @@ public class Leaderboard {
     private List<LeaderboardEntry> leaderboard = new ArrayList<>();
 
     public void constructLeaderboard(int maxResults, int dropResults) {
-        List<Player> downloadedPlayers = downloadData.downloadPlayers(maxResults, 5);
+        List<Player> downloadedPlayers = downloadData.downloadPlayers(maxResults, 20);
         System.out.println(DownloadData.getApiCalls() + " api calls made.");
         players = downloadedPlayers.stream()
                 .filter(p -> p.getFinishedRacesCount() > 0)
