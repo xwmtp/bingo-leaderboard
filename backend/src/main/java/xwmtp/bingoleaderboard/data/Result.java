@@ -42,12 +42,13 @@ public class Result {
     }
 
     private int agePenaltyFactorx10000(int days) {
-        final double oneYearFactor = 1.1;
+        final double twoYearFactor = 1.2;
         final double threshold = 60.0;
         final double maxFactor = 1.2;
+        final double TWO_YEARS = 730;
 
-        final double base = 1 - (oneYearFactor - 1) * threshold / (365 - threshold);
-        final double intercept = (oneYearFactor - 1) / (365 - threshold);
+        final double base = 1 - (twoYearFactor - 1) * threshold / (TWO_YEARS - threshold);
+        final double intercept = (twoYearFactor - 1) / (TWO_YEARS - threshold);
         double penaltyFactor = base + (double) days * intercept;
 
         penaltyFactor = Math.min(Math.max(penaltyFactor, 1), maxFactor);
