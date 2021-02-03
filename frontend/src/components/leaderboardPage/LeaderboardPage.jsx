@@ -20,9 +20,11 @@ class LeaderboardPage extends React.Component {
 
     LeaderboardPageDiv = styled.div`
         display: flex;
+        width: 100%;
         flex-grow: 1;
         flex-direction: row;
         justify-content: center;
+        //border: 1px solid green;
     `
 
     requestLeaderboardData() {

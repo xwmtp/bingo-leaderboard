@@ -24,3 +24,30 @@ createTheme('bingo', {
         disabled: 'rgba(0,0,0,.12)',
     },
 });
+
+export const customStyles = {
+    header: {
+        style: {
+            justifyContent: 'center',
+        }
+    },
+    headCells: {
+        style: {
+            fontSize: '15px',
+            fontWeight: 'bold',
+            color: '#f7e279',
+            justifyContent: 'center',
+            paddingLeft: '35px',
+        }
+
+    },
+    rows: {
+        style: {
+            fontSize: '15px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '40px',
+        }
+
+    }
+};

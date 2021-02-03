@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import DataTable from 'react-data-table-component';
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en';
-TimeAgo.addDefaultLocale(en);
+import ReactTimeAgo from 'react-time-ago'
+import {customStyles} from '../TableTheme.js'
 
 
 class LeaderboardBlock extends React.Component {
@@ -22,10 +21,6 @@ class LeaderboardBlock extends React.Component {
     height: 100%;
     font-size: 16px;
 `
-
-    componentDidMount() {
-        this.timeAgo = new TimeAgo('en-US')
-    }
 
     customStyles = {
         header: {
@@ -94,9 +89,9 @@ class LeaderboardBlock extends React.Component {
         {
             name: 'Last seen',
             selector: 'lastRaced',
-            width: '100px',
+            width: '80px',
             sortable: true,
-            format: (row, idx) => this.timeAgo.format(new Date(row.lastRaced)).replace(' ago', ''),
+            format: (row, idx) => <ReactTimeAgo date={new Date(row.lastRaced)} timeStyle="mini-minute"/>,//.replace(' ago', ''),
             hide: 1000,
             right: true
         },
@@ -120,7 +115,7 @@ class LeaderboardBlock extends React.Component {
                         columns={this.columns}
                         data={this.props.data}
                         theme='bingo'
-                        customStyles={this.customStyles}
+                        customStyles={customStyles}
                         noHeader='true'
                         noDataComponent={<p>No data available.</p>}
                         onRowClicked={this.props.onRowClick}

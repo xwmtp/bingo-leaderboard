@@ -1,38 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import DataTable from 'react-data-table-component';
+import { customStyles } from '../TableTheme.js'
 
 const TableDiv = styled.div`
     font-size: 16px;
     margin-bottom: 20px;
-    //border: 1px solid yellow;
 `
-const customStyles = {
-    header: {
-        style: {
-            justifyContent: 'center',
-        }
-    },
-    headCells: {
-        style: {
-            fontSize: '15px',
-            fontWeight: 'bold',
-            color: '#f7e279',
-            justifyContent: 'center',
-            paddingLeft: '35px',
-        }
 
-    },
-    rows: {
-        style: {
-            fontSize: '15px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            minHeight: '40px',
-        }
+const NoTableDiv = styled.div`
+    display: flex;
+    align-items: center;
+    height: 100%;
+    //margin-top: 100px;
+    //border 1px solid green;
+`
 
-    }
-}
+
 
 
 const columns = [
@@ -82,33 +66,15 @@ const onRowClicked = (row) => {
     window.open(`https://www.racetime.gg/${row.slug}`)
 }
 
-const customSort = (rows, field, direction) => {
-    console.log("sorting");
-    console.log(rows);
-    console.log(field);
-    console.log(direction);
-    const handleField = row => row[field];
-    console.log(handleField(rows[0]))
-    const newRows = rows.slice(0);
-    if (field === 'm') {
-        return 'm'
-    } else {
-        return newRows.sort((a, b) => {
-            //const val1 = typeof val1 === 'string'? a[field].toLowerCase : 
-            if (a[field] < b[field]) {
-                return direction === "asc"? -1 : 1
-            }
-            if (a[field] > b[field]) {
-                return direction === "asc"? 1 : -1
-            }
-            return 0})
-    }
-}
-
 function PlayerTable(props) {
     console.log("In player table:")
     console.log(props.data)
-    return (
+    const noTable =
+        <NoTableDiv>
+            <p>Click on a leaderboard row to display player info.</p>
+        </NoTableDiv>
+
+    const table =
         <TableDiv >
             <DataTable
                 title="Leaderboard"
@@ -118,13 +84,15 @@ function PlayerTable(props) {
                 customStyles={customStyles}
                 conditionalRowStyles={conditionalRowStyles}
                 onRowClicked={onRowClicked}
-                sortFunction={customSort}
                 noHeader='true'
-                noDataComponent={<p>Click on a leaderboard row to display player info.</p>}
+                noDataComponent={noTable}
                 pointerOnHover={true}
             />
         </TableDiv>
 
+    const tableContent = props.data.name === "" ? noTable : table;
+    return (
+        tableContent
     );
 }
 
