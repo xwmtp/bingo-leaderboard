@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { NavLink } from "react-router-dom"
 
 const HeaderDiv = styled.div`
     height: 150px;
@@ -9,6 +10,9 @@ const HeaderDiv = styled.div`
     align-items: center;
     justify-content: center;
     padding: 30px 30px;
+    .current {
+        color: white;
+    }
 `
 
 const Navigation = styled.div`
@@ -16,11 +20,12 @@ const Navigation = styled.div`
     flex-direction: row;
 `
 
-const Link = styled.div`
+const Link = styled(NavLink)`
     font-size: 25px;
     margin: 10px 20px;
     color: var(--light-gray);
     text-decoration: none;
+
 `;
 
 function Header() {
@@ -32,7 +37,7 @@ function Header() {
             </h1>
             <Navigation>
                 <Link to="/" activeClassName='current' exact>Leaderboard</Link>
-                <Link to="/" activeClassName='current' exact>About</Link>
+                <Link to="/about" activeClassName='current' exact>About</Link>
             </Navigation>
         </HeaderDiv>
     );

@@ -16,7 +16,6 @@ class LeaderboardPage extends React.Component {
         }
         this.requestLeaderboardData()
         this.updateCurrentPlayer = this.updateCurrentPlayer.bind(this);
-
     }
 
     LeaderboardPageDiv = styled.div`
