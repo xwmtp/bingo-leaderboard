@@ -14,13 +14,8 @@ import java.util.List;
 public class Endpoints {
     private final Leaderboard leaderboard;
 
-    public Endpoints() {
-        final int maxResults = 15;
-        final int dropResults = 3;
-        leaderboard = new Leaderboard();
-        //System.out.println(leaderboard);
-        leaderboard.constructLeaderboard(maxResults, dropResults);
-        //System.out.println(leaderboard);
+    public Endpoints(Leaderboard leaderboard) {
+        this.leaderboard = leaderboard;
     }
 
     @GetMapping("/api")

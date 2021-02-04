@@ -4,6 +4,8 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xwmtp.bingoleaderboard.util.Durations;
 import xwmtp.bingoleaderboard.data.Player;
 import xwmtp.bingoleaderboard.data.Result;
@@ -24,7 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DownloadData {
-
+    private static final Logger logger = LoggerFactory.getLogger(DownloadData.class);
     private final HttpClient client = HttpClient.newHttpClient();
     private final JsonDeserializer<Instant> instantDeserializer = (json, typeOfT, context) -> Instant.parse(json.getAsString());
     private final JsonDeserializer<Duration> durationDeserializer = (json, typeOfT, context) ->  Duration.parse(json.getAsString()) ;
@@ -33,7 +35,6 @@ public class DownloadData {
             .registerTypeAdapter(Instant.class, instantDeserializer)
             .registerTypeAdapter(Duration.class, durationDeserializer)
             .create();
-    private static int apiCalls = 0;
 
     public List<Player> downloadPlayers(int maxResults, int limit) {
         RacetimeLeaderboard leaderboard = downloadRacetimeLeaderboard();
@@ -45,10 +46,9 @@ public class DownloadData {
                 .limit(limit)
                 .collect(Collectors.toList());
         for (RacetimeRanking ranking : rankings) {
-            System.out.println(ranking.getUser().getName());
+            logger.trace("Downloading player {}...", ranking.getUser().getName());
             List<Result> results = downloadRacetimeResults(ranking, maxResults);
-            System.out.println(results.stream().map(r-> Durations.formatDuration(r.getTime())).collect(Collectors.toList()));
-            System.out.println(results.size() + "\n");
+            logger.trace("Downloaded ({}) times: {} ", results.size(), results.stream().map(r-> Durations.formatDuration(r.getTime())).collect(Collectors.toList()));
             players.add(new Player(ranking, results));
         }
         return players;
@@ -87,8 +87,7 @@ public class DownloadData {
             RacetimeRacesPage racesPage = gson.fromJson(racetimeRacesData, RacetimeRacesPage.class);
             return racesPage;
         } catch (IOException | InterruptedException e) {
-            System.out.println("Error: " + e);
-            System.out.println("Couldn't download Racetime races for player with id " + userId + ".");
+            logger.error("While retrieving Racetime data for player with id {}: {}", userId, e);
             return new RacetimeRacesPage() {
             };
         }
@@ -104,8 +103,7 @@ public class DownloadData {
                     .findFirst()
                     .orElse(new RacetimeLeaderboard());
         } catch (IOException | InterruptedException e) {
-            System.out.println("Error: " + e);
-            System.out.println("Couldn't download Racetime leaderboard.");
+            logger.error("While retrieving Racetime leaderboard data, returning empty leaderboard:", e);
             return new RacetimeLeaderboard();
         }
     }
@@ -120,17 +118,12 @@ public class DownloadData {
         HttpResponse<String> response =
                 client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(uri);
+        logger.trace(uri);
         if (response.statusCode() == 200) {
-            apiCalls++;
             return response.body();
         } else {
-            System.out.println("API request unsuccessful (status " + response.statusCode() + " : " + response.body() + ")");
+            logger.error("Unsuccessful API request for {} (status {}: {})", uri, response.statusCode(), response.body());
             return "{}";
         }
-    }
-
-    public static int getApiCalls() {
-        return apiCalls;
     }
 }
