@@ -2,53 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import DataTable from 'react-data-table-component';
 import ReactTimeAgo from 'react-time-ago'
-import {customStyles} from '../TableTheme.js'
-
+import { customStyles } from '../TableTheme.js'
 
 class LeaderboardBlock extends React.Component {
 
     LeaderboardDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 45%;
-    max-width: 700px;
-    margin-right: 20px;
-    //border: solid grey 1px;
-`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 45%;
+        max-width: 700px;
+        margin-right: 20px;
+        //border: solid grey 1px;
+    `
 
     TableDiv = styled.div`
-    height: 100%;
-    font-size: 16px;
-`
-
-    customStyles = {
-        header: {
-            style: {
-                justifyContent: 'center',
-            }
-        },
-        headCells: {
-            style: {
-                fontSize: '15px',
-                fontWeight: 'bold',
-                color: '#f7e279',
-                justifyContent: 'center',
-                paddingLeft: '35px',
-            }
-
-        },
-        rows: {
-            style: {
-                fontSize: '15px',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '40px',
-            }
-
-        }
-    }
-
+        height: 100%;
+        font-size: 16px;
+    `
 
     columns = [
         {
@@ -80,10 +51,11 @@ class LeaderboardBlock extends React.Component {
 
         },
         {
-            name: 'LB time',
-            selector: 'leaderboardTime',
+            name: 'Median',
+            selector: 'effectiveMedian',
             width: '90px',
             sortable: true,
+            hide: 1200,
             center: true,
         },
         {
@@ -91,8 +63,8 @@ class LeaderboardBlock extends React.Component {
             selector: 'lastRaced',
             width: '80px',
             sortable: true,
-            format: (row, idx) => <ReactTimeAgo date={new Date(row.lastRaced)} timeStyle="mini-minute"/>,//.replace(' ago', ''),
-            hide: 1000,
+            format: (row, idx) => <ReactTimeAgo date={new Date(row.lastRaced)} timeStyle="mini-minute" />,//.replace(' ago', ''),
+            hide: 1200,
             right: true
         },
         {
@@ -109,15 +81,14 @@ class LeaderboardBlock extends React.Component {
         console.log(this.props.data)
         return (
             <this.LeaderboardDiv id="leaderboard-div">
-                <this.TableDiv id="leaderboard-table">
+                <this.TableDiv>
                     <DataTable
                         title="Leaderboard"
                         columns={this.columns}
-                        data={this.props.data}
+                        data={this.props.data.entries}
                         theme='bingo'
                         customStyles={customStyles}
                         noHeader='true'
-                        noDataComponent={<p>No data available.</p>}
                         onRowClicked={this.props.onRowClick}
                         pointerOnHover={true}
                     />
@@ -125,7 +96,6 @@ class LeaderboardBlock extends React.Component {
             </this.LeaderboardDiv>
         );
     }
-
 }
 
 export default LeaderboardBlock;

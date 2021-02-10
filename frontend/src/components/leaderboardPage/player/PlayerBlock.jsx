@@ -5,6 +5,9 @@ import Tooltip from "./Tooltip"
 
 const PlayerDiv = styled.div`
     display: flex;
+    position: sticky;
+    top: 50px;
+    align-self: flex-start;
     flex-direction: column;
     align-items: center;
     //justify-content: center;
@@ -24,10 +27,10 @@ const PlayerDiv = styled.div`
 `
 
 const PlayerInfo = styled.div`
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 `
 
 const PlayerStats = styled.div`
@@ -49,7 +52,6 @@ const PlayerTimes = styled.div`
 
 `
 
-
 const StatColumn = styled.div`
     display: flex;
     flex-direction: column;
@@ -60,13 +62,12 @@ const StatColumn = styled.div`
 const PlayerExplanation = styled.div`
     color: grey;
     width: 100%;
-    font-size: 15px;
+    font-size: 14px;
     text-align: center;
     span {
         font-weight: bold;
     }
 `
-
 
 function PlayerBlock(props) {
     console.log(props.data)
@@ -86,7 +87,7 @@ function PlayerBlock(props) {
                             text={`Median of the times ${props.data.name} got in their latest 15 races. Unfinished races are replaced with the worst time of the finished races. Compared to average, this is a fairer metric when it comes to forfeits.`} />
                         <Tooltip title="leaderboard time"
                             textheader="leaderboard time"
-                            text={`Average of the aged times of ${props.data.name}'s latest 15 races. Ignores the worst 3 aged times (gray rows in the table). Read more about how the leaderboard time is calculated on the 'About' page.`} />
+                            text={`Average of the aged times of ${props.data.name}'s latest 15 races, but ignores the worst 3 aged times (gray rows in the table). Learn more about how the leaderboard time is calculated on the 'About' page.`} />
                     </StatColumn>
                     <StatColumn>
                         <p>{props.data.leaderboardEntry.average}</p>

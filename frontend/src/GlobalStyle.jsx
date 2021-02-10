@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
 
     html {
         height: 100%;
-        overflow-y: scroll;
+        //overflow-y: scroll;
     }
   
     body {
@@ -31,12 +31,7 @@ const GlobalStyle = createGlobalStyle`
         //text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
     }
 
-
-    h1 {
-        color: var(--orange);
-    }
-
-    h2 {
+    h1, h2, h3 {
         color: var(--orange);
     }
 

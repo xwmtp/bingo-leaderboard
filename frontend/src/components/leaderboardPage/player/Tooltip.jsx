@@ -2,9 +2,9 @@ import React from "react";
 
 function Tooltip(props) {
     return (
-        <div class="tooltip">{props.title}
-            <span class="tooltiptext">
-                <p class="tooltiptextheader">
+        <div className="tooltip">{props.title}
+            <span className="tooltiptext">
+                <p className="tooltiptextheader">
                     {props.textheader}
                 </p>
                 <p>

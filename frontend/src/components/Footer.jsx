@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React from "react";
 
 const FooterDiv = styled.div`
-    //height: 150px;
     width: 100%;
     font-size: 14px;
     display: flex;
@@ -10,7 +9,7 @@ const FooterDiv = styled.div`
     align-items: center;
     justify-content: center;
     padding: 20px;
-    p{
+    p {
         color: grey;
     }
     a:link, a:visited, a:hover, a:active {

@@ -16,15 +16,14 @@ const AboutDiv = styled.div`
         p {
             text-align: center;
             font-size: 17px;
-            margin: 10px 0px 20px 0px;
-            span {
-                font-weight: bold;
-            }
-            ul {
-                text-align: left;
-            }
         }
-        h3{
+        ul, p {
+            margin: 10px 0px 20px 0px;
+        }
+        span {
+            font-weight: bold;
+        }
+        h3 {
             color: var(--orange);
         }
 `
@@ -48,22 +47,20 @@ function AboutPage() {
             <h2>
                 Features
             </h2>
-            <p>
-                <ul>
-                    <li>
-                        Click on a leaderboard row to go to display the latest races of that player.
+            <ul>
+                <li>
+                    Click on a leaderboard row to display the latest races of that player.
                     </li>
-                    <li>
-                        Click on a row in the player's races table to go to the Racetime page of that race.
+                <li>
+                    Click on a row in the player's races table to open the Racetime page of that race.
                     </li>
-                    <li>
-                        Most columns are sortable, click on the header to sort.
+                <li>
+                    Most columns are sortable, click on the header of a column to sort it.
                     </li>
-                    <li>
-                        Hover over the player stats for a short explanation. For a longer explanation, read below.
+                <li>
+                    Hover over the player stats for a short explanation. For a longer explanation, read below.
                     </li>
-                </ul>
-            </p>
+            </ul>
             <h2>
                 Calculation
             </h2>
@@ -105,6 +102,14 @@ function AboutPage() {
                 This number is put through a sigmoid function (<span>2 / (1 + e^(4*x))</span>), so that differences in points are less steep for higher leaderboard times.
                 Finally, this number is multiplied by 1000 to result in the score.
                 For example, a 1:05 leaderboard time would result in 1000 points, a 1:20 in 745 points, a 2:00 in 275 points.
+            </p>
+            <h3>
+                Average time
+            </h3>
+            <p>
+                The average time is displayed as a metric, but doesn't have any effect on the ranking.
+                Like with the leaderboard time, the worst three aged results are dropped.
+                So the average is calculated over the non-gray rows in the races table.
             </p>
         </AboutDiv>
     );

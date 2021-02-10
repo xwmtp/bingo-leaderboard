@@ -10,8 +10,9 @@ public class LeaderboardEntry {
     private final int racetimePoints;
     private final int leaderboardScore;
     private final String leaderboardTime;
-    private final String effectiveMedian;
     private final String average;
+    private final String effectiveAverage;
+    private final String effectiveMedian;
     private final String lastRaced;
     private final int finishedRacesCount;
     private final int includedRacesCount;
@@ -26,6 +27,7 @@ public class LeaderboardEntry {
         leaderboardTime = formatDuration(player.leaderboardTime(dropResults));
         effectiveMedian = formatDuration(player.effectiveMedian());
         average = formatDuration(player.average());
+        effectiveAverage = formatDuration(player.effectiveAverage(dropResults));
         lastRaced = player.lastRaced().toString();
         finishedRacesCount = player.getFinishedRacesCount();
         includedRacesCount = player.getResults().size();
@@ -77,6 +79,8 @@ public class LeaderboardEntry {
     public String getAverage() {
         return average;
     }
+
+    public String getEffectiveAverage() {return effectiveAverage;}
 
     public String getLastRaced() {
         return lastRaced;

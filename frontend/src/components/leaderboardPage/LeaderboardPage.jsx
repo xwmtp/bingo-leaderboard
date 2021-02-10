@@ -10,11 +10,11 @@ class LeaderboardPage extends React.Component {
         super(props);
         this.state = {
             loading: false,
-            leaderboardData: [],
+            leaderboardData: undefined,
             playerData: [],
             currentPlayer: ""
         }
-        this.requestLeaderboardData()
+        console.log('leaderboard page constructor!')
         this.updateCurrentPlayer = this.updateCurrentPlayer.bind(this);
     }
 
@@ -27,26 +27,22 @@ class LeaderboardPage extends React.Component {
         //border: 1px solid green;
     `
 
-    requestLeaderboardData() {
-        this.setState({ loading: true })
-        fetch(encodeURI(`${process.env.REACT_APP_BACKEND_URL}/leaderboard`), {
-            method: "get",
-            mode: "cors",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).then(r => {
-            if (r.status / 100 !== 2) {
-                this.setState({ loading: false, leaderboardData: [] })
-                throw Error(r.status);
-            }
-            return r.json();
-        }).then(leaderboardData => {
-            this.setState({ loading: false, leaderboardData: leaderboardData });
-        }).catch(() => console.log("Could not download leaderboard data."))
-            .then(() => this.requestPlayerData());
-    }
+    NoDataDiv = styled.div`
+        display: flex;
+        margin-top: 100px;
+        height: 100%;
+        //border 1px solid green;
+    `
 
+    EmptyDiv = styled.div`
+        display: flex;
+        height: 100%;
+        //border 1px solid green;
+    `
+
+    componentDidMount() {
+        this.requestPlayerData();
+    }
 
     requestPlayerData() {
         this.setState({ loading: true })
@@ -73,7 +69,7 @@ class LeaderboardPage extends React.Component {
         console.log(`new player: ${row.playerName}`)
     }
 
-    render() {
+    getPlayerTableData() {
         let playerTableData;
         if (this.state.playerData.length > 0 && this.state.currentPlayer !== "") {
             console.log(this.state.currentPlayer)
@@ -82,13 +78,36 @@ class LeaderboardPage extends React.Component {
         } else {
             playerTableData = { name: "", leaderboardEntry: [], results: [] }
         }
+        return playerTableData;
+    }
+
+    render() {
+        let pageContent;
+        console.log(this.props.data)
+        if (this.props.data === undefined) {
+            pageContent = <this.EmptyDiv id="empty" />
+        } else if (this.props.data.length === 0) {
+            pageContent = <this.NoDataDiv id="no-data">
+                <p>Currently no data available.</p>
+            </this.NoDataDiv>
+        }
+        else {
+            const playerTableData = this.getPlayerTableData();
+            pageContent =
+                <this.LeaderboardPageDiv id='leaderboard-page'>
+
+                    <LeaderboardBlock data={this.props.data} onRowClick={this.updateCurrentPlayer} />
+                    <PlayerBlock data={playerTableData} />
+                </this.LeaderboardPageDiv>
+        }
         return (
-            <this.LeaderboardPageDiv id='leaderboard-page'>
-                <LeaderboardBlock data={this.state.leaderboardData} onRowClick={this.updateCurrentPlayer}/>
-                <PlayerBlock data={playerTableData}  />
-            </this.LeaderboardPageDiv>
+            pageContent
         );
     }
 }
 
 export default LeaderboardPage;
+
+/*                     <this.LastUpdatedDiv>
+                        <p>Last updated: {Moment(this.state.leaderboardData.lastUpdated).format("LT, MMM Do YYYY ")}</p>
+                    </this.LastUpdatedDiv> */

@@ -4,18 +4,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import xwmtp.bingoleaderboard.leaderboard.Leaderboard;
+import xwmtp.bingoleaderboard.leaderboard.LeaderboardManager;
 import xwmtp.bingoleaderboard.leaderboard.LeaderboardEntry;
-import xwmtp.bingoleaderboard.data.Player;
 import xwmtp.bingoleaderboard.leaderboard.LeaderboardPlayer;
 
 import java.util.List;
 
 @RestController
 public class Endpoints {
-    private final Leaderboard leaderboard;
+    private final LeaderboardManager leaderboardManager;
 
-    public Endpoints(Leaderboard leaderboard) {
-        this.leaderboard = leaderboard;
+    public Endpoints(LeaderboardManager leaderboardManager) {
+        this.leaderboardManager = leaderboardManager;
     }
 
     @GetMapping("/api")
@@ -24,18 +24,18 @@ public class Endpoints {
     }
 
     @GetMapping("api/leaderboard")
-    public List<LeaderboardEntry> leaderboard() {
-        return leaderboard.getLeaderboard();
+    public Leaderboard leaderboard() {
+        return leaderboardManager.getLeaderboard();
     }
 
     @GetMapping("api/players")
     public List<LeaderboardPlayer> players() {
-        return leaderboard.getPlayers();
+        return leaderboardManager.getPlayers();
     }
 
     @GetMapping("api/players/{name}")
     public LeaderboardPlayer player(@PathVariable("name") String name) {
-        LeaderboardPlayer player = leaderboard.getPlayers().stream()
+        LeaderboardPlayer player = leaderboardManager.getPlayers().stream()
                 .filter(e -> e.getName().equalsIgnoreCase(name))
                 .findFirst()
                 .orElse(null);

@@ -10,14 +10,12 @@ const TableDiv = styled.div`
 
 const NoTableDiv = styled.div`
     display: flex;
-    align-items: center;
+    position: sticky;
+    top: 50px;
+    margin-top: 100px;
     height: 100%;
-    //margin-top: 100px;
-    //border 1px solid green;
+    //border: 1px solid green;
 `
-
-
-
 
 const columns = [
     {

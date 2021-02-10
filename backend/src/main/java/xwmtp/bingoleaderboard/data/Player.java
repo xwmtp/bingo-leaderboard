@@ -16,6 +16,7 @@ public class Player {
     private final int points;
     private final List<Result> results;
     private final int finishedRacesCount;
+    private final Duration forfeitTime;
 
     public Player(RacetimeRanking ranking, List<Result> results) {
         name = ranking.getUser().getName();
@@ -24,6 +25,7 @@ public class Player {
         finishedRacesCount = (int) results.stream()
                 .filter(r -> !r.isForfeit())
                 .count();
+        forfeitTime = forfeitTime(results);
     }
 
     public int leaderboardScore(int dropResults) {
@@ -36,10 +38,9 @@ public class Player {
 
     public Duration leaderboardTime(int dropResults) {
         //final List<Result> topResults = dropWorstRaces(results);
-        final Duration forfeitTime = forfeitTime(results);
         final List<Duration> times = results.stream()
                 .sorted(Comparator.comparing(Result::timePenalizedByAge))
-                .limit(Math.max(results.size() - dropResults, dropResults))
+                .limit(racesLimit(dropResults))
                 .map(r -> r.isForfeit() ? forfeitTime : r.timePenalizedByAge())
                 .collect(Collectors.toList());
         return Durations.average(times);
@@ -49,6 +50,15 @@ public class Player {
         final List<Duration> times = results.stream()
                 .filter(r -> !r.isForfeit())
                 .map(Result::getTime)
+                .collect(Collectors.toList());
+        return Durations.average(times);
+    }
+
+    public Duration effectiveAverage(int dropResults) {
+        final List<Duration> times = results.stream()
+                .sorted(Comparator.comparing(Result::timePenalizedByAge))
+                .limit(racesLimit(dropResults))
+                .map(r -> r.isForfeit() ? forfeitTime : r.getTime())
                 .collect(Collectors.toList());
         return Durations.average(times);
     }
@@ -79,6 +89,10 @@ public class Player {
         final Duration worstTime = Collections.max(finishedTimes);
         final Duration penalizedWorstTime = worstTime.multipliedBy(11).dividedBy(10); // multiply by 1.1
         return Collections.max(List.of(penalizedAverage, penalizedWorstTime));
+    }
+
+    public int racesLimit(int dropResults) {
+        return Math.max(results.size() - dropResults, dropResults);
     }
 
     private List<Duration> finishedTimes(List<Result> results) {
