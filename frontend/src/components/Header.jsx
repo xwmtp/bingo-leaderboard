@@ -3,7 +3,7 @@ import React from "react";
 import { NavLink } from "react-router-dom"
 
 const HeaderDiv = styled.div`
-    height: 150px;
+
     width: 100%;
     display: flex;
     flex-direction: column;

@@ -7,8 +7,6 @@ import AboutPage from "./components/AboutPage";
 import LastUpdated from "./components/UpdatedText"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
-
-
 class App extends React.Component {
 
   constructor(props) {
@@ -61,7 +59,7 @@ class App extends React.Component {
     return (
       <this.AppDiv id="app" >
         <Router>
-          <LastUpdated timestamp={timestamp}/>
+
           <Header id="header"/>
           <Switch>
             <Route exact path="/" render={(props) => <LeaderboardPage {...props} data={this.state.leaderboardData} />} />
