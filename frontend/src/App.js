@@ -29,7 +29,6 @@ class App extends React.Component {
   }
 
   requestLeaderboardData() {
-    console.log("Requesting leaderboard data....")
     this.setState({ loading: true })
     fetch(encodeURI(`${process.env.REACT_APP_BACKEND_URL}/leaderboard`), {
       method: "get",
@@ -44,11 +43,8 @@ class App extends React.Component {
       }
       return r.json();
     }).then(leaderboardData => {
-      console.log('leaderboard data is')
-      console.log(leaderboardData)
       this.setState({ loading: false, leaderboardData: leaderboardData });
     }).catch(() => {
-      console.log("Could not download leaderboard data.")
       this.setState({ loading: false, leaderboardData: [] })
     });
   }
@@ -59,8 +55,8 @@ class App extends React.Component {
     return (
       <this.AppDiv id="app" >
         <Router>
-
-          <Header id="header"/>
+          <LastUpdated timestamp={timestamp} />
+          <Header id="header" />
           <Switch>
             <Route exact path="/" render={(props) => <LeaderboardPage {...props} data={this.state.leaderboardData} />} />
             <Route path="/about" component={AboutPage} />

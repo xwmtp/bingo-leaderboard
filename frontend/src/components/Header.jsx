@@ -3,13 +3,12 @@ import React from "react";
 import { NavLink } from "react-router-dom"
 
 const HeaderDiv = styled.div`
-
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 30px 30px;
+    padding: 20px 0px 30px 0px;
     .current {
         color: white;
     }
@@ -25,7 +24,6 @@ const Link = styled(NavLink)`
     margin: 10px 20px;
     color: var(--light-gray);
     text-decoration: none;
-
 `;
 
 function Header() {

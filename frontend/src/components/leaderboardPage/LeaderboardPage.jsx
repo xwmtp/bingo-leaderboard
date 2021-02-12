@@ -14,7 +14,6 @@ class LeaderboardPage extends React.Component {
             playerData: [],
             currentPlayer: ""
         }
-        console.log('leaderboard page constructor!')
         this.updateCurrentPlayer = this.updateCurrentPlayer.bind(this);
     }
 
@@ -24,20 +23,17 @@ class LeaderboardPage extends React.Component {
         flex-grow: 1;
         flex-direction: row;
         justify-content: center;
-        //border: 1px solid green;
     `
 
     NoDataDiv = styled.div`
         display: flex;
         margin-top: 100px;
         height: 100%;
-        //border 1px solid green;
     `
 
     EmptyDiv = styled.div`
         display: flex;
         height: 100%;
-        //border 1px solid green;
     `
 
     componentDidMount() {
@@ -65,15 +61,11 @@ class LeaderboardPage extends React.Component {
 
     updateCurrentPlayer(row) {
         this.setState({ currentPlayer: row.playerName });
-        console.log(row)
-        console.log(`new player: ${row.playerName}`)
     }
 
     getPlayerTableData() {
         let playerTableData;
         if (this.state.playerData.length > 0 && this.state.currentPlayer !== "") {
-            console.log(this.state.currentPlayer)
-            console.log(this.state.playerData)
             playerTableData = this.state.playerData.find(p => p.name === this.state.currentPlayer)
         } else {
             playerTableData = { name: "", leaderboardEntry: [], results: [] }
@@ -83,7 +75,6 @@ class LeaderboardPage extends React.Component {
 
     render() {
         let pageContent;
-        console.log(this.props.data)
         if (this.props.data === undefined) {
             pageContent = <this.EmptyDiv id="empty" />
         } else if (this.props.data.length === 0) {

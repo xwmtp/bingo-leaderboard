@@ -9,14 +9,13 @@ const LastUpdated = styled.div`
     font-size: 12px;
     color: gray;
     align-self: flex-start;
-    border: solid 1px red;
 `
 
 function UpdatedText(props) {
 
     let text = ""
     if (props.timestamp !== undefined) {
-        text = `Data last updated at ${Moment(props.timestamp).format("LT, MMM Do YYYY ")}`
+        text = `Data last updated at ${Moment(props.timestamp).format("h:mm a (utcZ), D MMM  YYYY ")}`
     }
     return (
         <LastUpdated id='last-updated-text' >

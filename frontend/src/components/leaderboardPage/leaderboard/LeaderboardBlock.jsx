@@ -11,9 +11,8 @@ class LeaderboardBlock extends React.Component {
         flex-direction: column;
         align-items: center;
         width: 45%;
-        max-width: 700px;
+        max-width: 650px;
         margin-right: 20px;
-        //border: solid grey 1px;
     `
 
     TableDiv = styled.div`
@@ -55,16 +54,16 @@ class LeaderboardBlock extends React.Component {
             selector: 'effectiveMedian',
             width: '90px',
             sortable: true,
-            hide: 1200,
+            hide: 1300,
             center: true,
         },
         {
             name: 'Last seen',
             selector: 'lastRaced',
-            width: '80px',
+            width: '70px',
             sortable: true,
-            format: (row, idx) => <ReactTimeAgo date={new Date(row.lastRaced)} timeStyle="mini-minute" />,//.replace(' ago', ''),
-            hide: 1200,
+            format: (row, idx) => <ReactTimeAgo date={new Date(row.lastRaced)} timeStyle="mini-minute" />,
+            hide: 1300,
             right: true
         },
         {
@@ -72,13 +71,20 @@ class LeaderboardBlock extends React.Component {
             selector: 'finishedRacesFraction',
             sortable: false,
             center: true,
+            sortFunction: (a, b) => {
+                const a1 = parseInt(a.finishedRacesFraction.split("/")[0])
+                const a2 = parseInt(a.finishedRacesFraction.split("/")[1])
+                const b1 = parseInt(b.finishedRacesFraction.split("/")[0])
+                const b2 = parseInt(b.finishedRacesFraction.split("/")[1])
+                a = a1 + 0.01 * a2
+                b = b1 + 0.01 * b2
+                return a === b ? 0 : a > b ? 1 : -1;
+            }
         },
     ];
 
 
     render() {
-        console.log("In leaderboard table:")
-        console.log(this.props.data)
         return (
             <this.LeaderboardDiv id="leaderboard-div">
                 <this.TableDiv>

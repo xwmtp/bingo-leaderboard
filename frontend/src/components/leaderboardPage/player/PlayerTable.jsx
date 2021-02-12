@@ -12,24 +12,23 @@ const NoTableDiv = styled.div`
     display: flex;
     position: sticky;
     top: 50px;
+    color: grey;
     margin-top: 100px;
     height: 100%;
-    //border: 1px solid green;
 `
 
 const columns = [
     {
         name: 'Time',
         selector: 'time',
-        width: '100px',
+        width: '105px',
         sortable: true,
         center: true,
-
     },
     {
         name: 'Aged',
         selector: 'agedTime',
-        width: '100px',
+        width: '105px',
         sortable: true,
         center: true,
     },
@@ -37,7 +36,7 @@ const columns = [
         name: 'Date',
         selector: 'date',
         sortable: true,
-        width: '110px',
+        width: '120px',
         center: true,
         format: (row, idx) => row.date.split('T')[0]
     },
@@ -45,7 +44,8 @@ const columns = [
         name: 'Comment',
         selector: 'comment',
         sortable: false,
-        maxWidth: '180px',
+        maxWidth: '230px',
+        hide: 1300,
         left: true,
 
     },
@@ -65,8 +65,6 @@ const onRowClicked = (row) => {
 }
 
 function PlayerTable(props) {
-    console.log("In player table:")
-    console.log(props.data)
     const noTable =
         <NoTableDiv>
             <p>Click on a leaderboard row to display player info.</p>

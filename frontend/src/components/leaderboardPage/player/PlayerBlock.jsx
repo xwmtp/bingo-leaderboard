@@ -1,7 +1,8 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import PlayerTable from "./PlayerTable";
-import Tooltip from "./Tooltip"
+import Tooltip from "./Tooltip";
 
 const PlayerDiv = styled.div`
     display: flex;
@@ -10,12 +11,10 @@ const PlayerDiv = styled.div`
     align-self: flex-start;
     flex-direction: column;
     align-items: center;
-    //justify-content: center;
     width: 45%;
-    max-width: 700px;
+    max-width: 650px;
     margin-left: 20px;
     margin-top: 10px;
-    //border: solid grey 1px;
 
     .bold {
         font-weight: bold;
@@ -40,7 +39,6 @@ const PlayerStats = styled.div`
     width: 100%;
     margin: 15px 0px;
     padding: 0px 20px;
-    //border: solid green 1px;
 `
 
 const PlayerTimes = styled.div`
@@ -48,7 +46,6 @@ const PlayerTimes = styled.div`
     width: 210px;
     flex-direction: row;
     justify-content: center;
-    //border: 1px solid fuchsia;
 
 `
 
@@ -69,8 +66,13 @@ const PlayerExplanation = styled.div`
     }
 `
 
+const Link = styled(NavLink)`
+    color: var(--light-gray);
+    font-weight: bold;
+    text-decoration: none;
+`;
+
 function PlayerBlock(props) {
-    console.log(props.data)
     const playerInfo = props.data.name === "" ? <></> :
         <PlayerInfo>
             <h2>
@@ -115,7 +117,7 @@ function PlayerBlock(props) {
     const playerExplanation = props.data.name === "" ? <></> :
         <PlayerExplanation>
             <p>Click on a row to go to the Racetime page of that race.</p>
-            <p>Hover over the stats for more information, or visit to the About page.</p>
+            <p>Hover over the stats for more information, or visit the <Link to="/about" activeClassName='current'>About</Link> page.</p>
         </PlayerExplanation>
 
 

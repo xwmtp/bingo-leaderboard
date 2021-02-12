@@ -37,7 +37,6 @@ public class Player {
     }
 
     public Duration leaderboardTime(int dropResults) {
-        //final List<Result> topResults = dropWorstRaces(results);
         final List<Duration> times = results.stream()
                 .sorted(Comparator.comparing(Result::timePenalizedByAge))
                 .limit(racesLimit(dropResults))
