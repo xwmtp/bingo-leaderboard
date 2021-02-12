@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class Player {
 
     private final String name;
+    private final String id;
     private final int points;
     private final List<Result> results;
     private final int finishedRacesCount;
@@ -20,6 +21,7 @@ public class Player {
 
     public Player(RacetimeRanking ranking, List<Result> results) {
         name = ranking.getUser().getName();
+        id = ranking.getUser().getId();
         points = ranking.getScore();
         this.results = results;
         finishedRacesCount = (int) results.stream()
@@ -103,6 +105,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public int getPoints() {

@@ -75,9 +75,11 @@ const Link = styled(NavLink)`
 function PlayerBlock(props) {
     const playerInfo = props.data.name === "" ? <></> :
         <PlayerInfo>
-            <h2>
-                {`#${props.data.leaderboardEntry.rank} ${props.data.name}`}
-            </h2>
+            <a href={`https://racetime.gg/user/${props.data.id}`} target="_blank" rel="noreferrer">
+                <h2>
+                    {`#${props.data.leaderboardEntry.rank} ${props.data.name}`}
+                </h2>
+            </a>
             <PlayerStats>
                 <PlayerTimes>
                     <StatColumn className="bold">
@@ -100,7 +102,7 @@ function PlayerBlock(props) {
                 </PlayerTimes>
                 <PlayerTimes>
                     <StatColumn className="bold">
-                    <Tooltip title="leaderboard score"
+                        <Tooltip title="leaderboard score"
                             textheader="leaderboard score"
                             text={`Directly tied to the leaderboard time. Decreases over time when a player isn't active.`} />
                         <p>racetime points</p>
@@ -116,11 +118,9 @@ function PlayerBlock(props) {
 
     const playerExplanation = props.data.name === "" ? <></> :
         <PlayerExplanation>
-            <p>Click on a row to go to the Racetime page of that race.</p>
-            <p>Hover over the stats for more information, or visit the <Link to="/about" activeClassName='current'>About</Link> page.</p>
+            <p>Click on a row/player title to go to the Racetime page.</p>
+            <p>Hover over the stats for an explanation, or visit the <Link to="/about" activeClassName='current'>About</Link> page to learn more.</p>
         </PlayerExplanation>
-
-
 
     return (
         <PlayerDiv id="player-div">

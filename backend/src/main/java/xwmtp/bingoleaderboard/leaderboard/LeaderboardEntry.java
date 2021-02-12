@@ -7,6 +7,7 @@ import static xwmtp.bingoleaderboard.util.Durations.formatDuration;
 public class LeaderboardEntry {
 
     private final String playerName;
+    private final String playerId;
     private final int racetimePoints;
     private final int leaderboardScore;
     private final String leaderboardTime;
@@ -22,6 +23,7 @@ public class LeaderboardEntry {
     public LeaderboardEntry(Player player, int dropResults) {
 
         playerName = player.getName();
+        playerId = player.getId();
         racetimePoints = player.getPoints();
         leaderboardScore = player.leaderboardScore(dropResults);
         leaderboardTime = formatDuration(player.leaderboardTime(dropResults));
@@ -58,6 +60,10 @@ public class LeaderboardEntry {
 
     public String getPlayerName() {
         return playerName;
+    }
+
+    public String getPlayerId() {
+        return playerId;
     }
 
     public int getRacetimePoints() {

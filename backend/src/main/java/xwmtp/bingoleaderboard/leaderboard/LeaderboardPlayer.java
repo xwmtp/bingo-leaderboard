@@ -12,11 +12,13 @@ import java.util.stream.Stream;
 
 public class LeaderboardPlayer {
     private final String name;
+    private final String id;
     private final LeaderboardEntry leaderboardEntry;
     private final List<LeaderboardResult> results;
 
     public LeaderboardPlayer(Player player, LeaderboardEntry entry, int dropResults) {
         name = player.getName();
+        id = player.getId();
         leaderboardEntry = entry;
         int numConsidered = player.racesLimit(dropResults);
         List<Result> sortedResults = player.getResults().stream()
@@ -35,6 +37,10 @@ public class LeaderboardPlayer {
 
     public String getName() {
         return name;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public List<LeaderboardResult> getResults() {

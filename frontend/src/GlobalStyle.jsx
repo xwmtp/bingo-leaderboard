@@ -34,7 +34,9 @@ const GlobalStyle = createGlobalStyle`
     h1, h2, h3 {
         color: var(--orange);
     }
-
+    a:link, a:visited, a:hover, a:active {
+        text-decoration: none;
+    }
     #root {
         height: 100%;
     }
@@ -42,7 +44,8 @@ const GlobalStyle = createGlobalStyle`
     .tooltip {
         position: relative;
         display: inline-block;
-        cursor: pointer;
+        //cursor: pointer;
+        user-select: none;
     }
 
     .tooltip .tooltiptext {

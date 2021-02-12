@@ -51,16 +51,19 @@ function AboutPage() {
             <ul>
                 <li>
                     Click on a leaderboard row to display the latest races of that player.
-                    </li>
+                </li>
                 <li>
                     Click on a row in the player's races table to open the Racetime page of that race.
-                    </li>
+                </li>
+                <li>
+                    Click on the player name above the player's table to open their Racetime user page.
+                </li>
                 <li>
                     Most columns are sortable, click on the header of a column to sort it.
-                    </li>
+                </li>
                 <li>
                     Hover over the player stats for a short explanation. For a longer explanation, read below.
-                    </li>
+                </li>
             </ul>
             <h2>
                 Calculation
@@ -86,10 +89,10 @@ function AboutPage() {
                 Leaderboard time
             </h3>
             <p>
-                To calculate the <span>leaderboard time</span>, your 3 results with the highest aged time are dropped.
-                If you have less than three races, no races are dropped.
-                Forfeits are considered to have a higher time than any other race, so they will be selected to be dropped first.
+                In short, the <span>leaderboard time</span> takes the average over your aged times after dropping the 3 worst results.
+                Forfeits are dropped first, then results with the highest aged time.
                 If you have more than three forfeits, each forfeited result will be replaced with a <span>forfeit time</span>.
+                No races are dropped if you have less than 3 results.
                 The forfeit time is either <span>1.1 * average of finished times</span>, or <span>1.2 * worst time</span>, whatever is higher.
                 Generally, most players don't have more than 3 forfeits in 15 races so this will only be needed when there are many forfeits.
             </p>
@@ -120,7 +123,15 @@ function AboutPage() {
                 To calculate the median, you take a player's last 15 races and sort the times.
                 Then you take the middle time (or the average of the middle two if the amount of races is even).
                 Forfeits are included and considered to be equal to the worst finished time.
-                Since the median doesn't ignore forfeits, this metric can be considered to be more balanced than the average, 
+                Since the median doesn't ignore forfeits, this metric can be considered to be more balanced than the average.
+            </p>
+            <h3>
+                Finished column
+            </h3>
+            <p>
+                The <span>finished</span> column in the leaderboard table shows how many races are being taken into account, and how many of those races finished (weren't forfeited).
+                The number before the slash shows the finished races, the number behind the total amount.
+                If a player completed more than 15 Bingo races in total, the second number should always show 15.
             </p>
         </AboutDiv>
     );
