@@ -3,7 +3,7 @@
 ./gradlew clean
 npm --prefix frontend install
 rm -rf frontend/build
-npm --prefix frontend build
+npm run --prefix frontend build
 cp frontend/build backend/src/main/resources/public
 git pull
 ./gradlew build
