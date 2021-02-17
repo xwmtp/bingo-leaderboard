@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  bingo-leaderboard:
+    build:
+      context: .
+    image: bingo-leaderboard
+    volumes:
+      - /bingo-leaderboard/volume:/etc/bingo-leaderboard
+    ports:
+      - "14445:8080"
+    restart: unless-stopped

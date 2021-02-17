@@ -32,6 +32,7 @@ yarn-error.log*
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 .idea/
+static/
 
 # User-specific stuff
 .idea/**/workspace.xml

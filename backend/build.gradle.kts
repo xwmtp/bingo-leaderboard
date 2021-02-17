@@ -4,8 +4,13 @@ plugins {
     java
 }
 
-group = "org.example"
+group = "xwmtp"
 version = "1.0-SNAPSHOT"
+
+tasks.withType<Jar> {
+    archiveBaseName.set("bingo-leaderboard")
+    archiveVersion.set("")
+}
 
 repositories {
     mavenCentral()
