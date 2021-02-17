@@ -4,7 +4,7 @@
 npm --prefix frontend install
 rm -rf frontend/build
 npm run --prefix frontend build
-cp frontend/build backend/src/main/resources/public
+cp -r frontend/build backend/src/main/resources/static
 git pull
 ./gradlew build
 docker-compose build --pull
