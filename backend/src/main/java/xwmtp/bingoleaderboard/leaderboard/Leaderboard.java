@@ -9,12 +9,12 @@ public class Leaderboard {
     private final List<LeaderboardEntry> entries;
 
     public Leaderboard(List<LeaderboardEntry> entries) {
-        lastUpdated = Instant.now();
         for (int i = 0; i < entries.size(); i++) {
             entries.get(i).setRank(i + 1);
         }
         this.entries = entries;
         numEntries = entries.size();
+        lastUpdated = Instant.now();
     }
 
     @Override

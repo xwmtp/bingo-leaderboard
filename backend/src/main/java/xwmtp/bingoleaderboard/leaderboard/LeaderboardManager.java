@@ -16,22 +16,35 @@ public class LeaderboardManager {
     private static final Logger logger = LoggerFactory.getLogger(LeaderboardManager.class);
     private static final int MAX_RESULTS = 15;
     private static final int DROP_RESULTS = 3;
-    private final DownloadData downloadData = new DownloadData();
+    private final DownloadData downloadData;
+    private final LeaderboardEntryCreator leaderboardEntryCreator;
     private List<LeaderboardPlayer> players = new ArrayList<>();
     private Leaderboard leaderboard;
 
+    public LeaderboardManager(DownloadData downloadData, LeaderboardEntryCreator leaderboardEntryCreator) {
+        this.downloadData = downloadData;
+        this.leaderboardEntryCreator = leaderboardEntryCreator;
+    }
+
     @PostConstruct
     public void constructLeaderboard() {
-        List<Player> downloadedPlayers = downloadData.downloadPlayers(MAX_RESULTS, -1);
-        players = downloadedPlayers.stream()
+        List<Player> downloadedPlayers = downloadData.downloadPlayers(MAX_RESULTS);
+        players = makeLeaderboardPlayers(downloadedPlayers);
+        leaderboard = new Leaderboard(makeLeaderboardEntries(players));
+    }
+
+    List<LeaderboardPlayer> makeLeaderboardPlayers(List<Player> players) {
+        return players.stream()
                 .filter(p -> p.getFinishedRacesCount() > 0)
-                .map(p -> new LeaderboardPlayer(p, new LeaderboardEntry(p, DROP_RESULTS), DROP_RESULTS))
+                .map(p -> new LeaderboardPlayer(p, leaderboardEntryCreator.create(p, DROP_RESULTS), DROP_RESULTS))
                 .collect(Collectors.toList());
-        List<LeaderboardEntry> leaderboardEntries = players.stream()
+    }
+
+    List<LeaderboardEntry> makeLeaderboardEntries(List<LeaderboardPlayer> players) {
+        return players.stream()
                 .map(LeaderboardPlayer::getLeaderboardEntry)
                 .sorted(Comparator.comparing(LeaderboardEntry::getLeaderboardTime))
                 .collect(Collectors.toList());
-        leaderboard = new Leaderboard(leaderboardEntries);
     }
 
     @Scheduled(cron = "0 0 9 * * ?", zone="UTC")

@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import xwmtp.bingoleaderboard.util.Durations;
 import xwmtp.bingoleaderboard.data.Player;
 import xwmtp.bingoleaderboard.data.Result;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class DownloadData {
     private static final Logger logger = LoggerFactory.getLogger(DownloadData.class);
     private final HttpClient client = HttpClient.newHttpClient();
