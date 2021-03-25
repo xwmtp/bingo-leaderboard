@@ -39,11 +39,10 @@ public class Player {
     }
 
     public Duration leaderboardTime(int dropResults) {
-        final List<Duration> times = results.stream()
-                .sorted(Comparator.comparing(Result::timePenalizedByAge))
-                .limit(racesLimit(dropResults))
+        final List<Duration> times = resultsWithoutWorst(dropResults).stream()
                 .map(r -> r.isForfeit() ? forfeitTime : r.timePenalizedByAge())
                 .collect(Collectors.toList());
+        System.out.println(times);
         return Durations.average(times);
     }
 
@@ -56,9 +55,7 @@ public class Player {
     }
 
     public Duration effectiveAverage(int dropResults) {
-        final List<Duration> times = results.stream()
-                .sorted(Comparator.comparing(Result::timePenalizedByAge))
-                .limit(racesLimit(dropResults))
+        final List<Duration> times = resultsWithoutWorst(dropResults).stream()
                 .map(r -> r.isForfeit() ? forfeitTime : r.getTime())
                 .collect(Collectors.toList());
         return Durations.average(times);
@@ -92,8 +89,16 @@ public class Player {
         return Collections.max(List.of(penalizedAverage, penalizedWorstTime));
     }
 
-    public int racesLimit(int dropResults) {
-        return Math.max(results.size() - dropResults, dropResults);
+    public List<Result> resultsWithoutWorst(int numWorst) {
+        int numIncludedRaces = racesLimit(numWorst);
+        return results.stream()
+                .sorted(Comparator.comparing(Result::timePenalizedByAge))
+                .limit(numIncludedRaces)
+                .collect(Collectors.toList());
+    }
+
+    public int racesLimit(int numDropped) {
+        return Math.max(results.size() - numDropped, numDropped);
     }
 
     private List<Duration> finishedTimes(List<Result> results) {

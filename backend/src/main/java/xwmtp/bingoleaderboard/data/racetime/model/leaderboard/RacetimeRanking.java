@@ -25,4 +25,16 @@ public class RacetimeRanking {
                 "\nid: " + user.getId() +
                 "\nname: " + user.getName();
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setTimesRaced(int timesRaced) {
+        this.timesRaced = timesRaced;
+    }
+
+    public void setUser(RacetimeUser user) {
+        this.user = user;
+    }
 }
