@@ -42,7 +42,6 @@ public class Player {
         final List<Duration> times = resultsWithoutWorst(dropResults).stream()
                 .map(r -> r.isForfeit() ? forfeitTime : r.timePenalizedByAge())
                 .collect(Collectors.toList());
-        System.out.println(times);
         return Durations.average(times);
     }
 
@@ -55,6 +54,7 @@ public class Player {
     }
 
     public Duration effectiveAverage(int dropResults) {
+        System.out.println(forfeitTime);
         final List<Duration> times = resultsWithoutWorst(dropResults).stream()
                 .map(r -> r.isForfeit() ? forfeitTime : r.getTime())
                 .collect(Collectors.toList());

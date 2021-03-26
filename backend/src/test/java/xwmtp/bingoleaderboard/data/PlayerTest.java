@@ -23,7 +23,7 @@ class PlayerTest {
     // leaderboardScore
 
     @Test
-    public void leaderboardScoreRetainsOrderOfLeaderboardTime() {
+    void leaderboardScoreRetainsOrderOfLeaderboardTime() {
         final int SECONDS_1H05 = 3900;
         final int SECONDS_1H20 = 4800;
         int prev_score = Integer.MAX_VALUE;
@@ -35,7 +35,7 @@ class PlayerTest {
     }
 
     @Test
-    public void leaderboardScoreNotNegative() {
+    void leaderboardScoreNotNegative() {
         int scoreZeroSeconds = playerWithLeaderboardTime(Duration.ofSeconds(0)).leaderboardScore(DROP_RESULTS);
         assertThat(scoreZeroSeconds).isNotNegative();
 
@@ -44,7 +44,7 @@ class PlayerTest {
     }
 
     @Test
-    public void leaderboardScoreIs1000ForA1H05() {
+    void leaderboardScoreIs1000ForA1H05() {
         int score = playerWithLeaderboardTime(Duration.ofMinutes(65)).leaderboardScore(DROP_RESULTS);
         assertThat(score).isEqualTo(1000);
     }
@@ -52,7 +52,7 @@ class PlayerTest {
     // leaderboardTime
 
     @Test
-    public void leaderboardTimeCalculatedCorrectly() {
+    void leaderboardTimeCalculatedCorrectly() {
         final Player testPlayer = playerWithResults(List.of(
                 result(false, Duration.ofMinutes(71), Duration.ofMinutes(73)),
                 result(true, Duration.ofHours(999), Duration.ofHours(999)),
@@ -63,6 +63,33 @@ class PlayerTest {
         assertThat(testPlayer.leaderboardTime(DROP_RESULTS)).isEqualTo(Duration.ofMinutes(83));
     }
 
+    // average
+
+    @Test
+    void averageCalculatedCorrectly() {
+        final Player testPlayer = playerWithResults(List.of(
+                result(false, Duration.ofMinutes(73), Duration.ofMinutes(74)),
+                result(true, Duration.ofHours(999), Duration.ofHours(999)),
+                result(false, Duration.ofMinutes(90), Duration.ofMinutes(90)),
+                result(false, Duration.ofMinutes(65), Duration.ofMinutes(70)),
+                result(true, Duration.ofHours(999), Duration.ofHours(999))
+        ));
+        assertThat(testPlayer.average()).isEqualTo(Duration.ofMinutes(76));
+    }
+
+    // effectiveAverage
+
+    @Test
+    void effectiveAverageCalculatedCorrectly() {
+        final Player testPlayer = playerWithResults(List.of(
+                result(false, Duration.ofMinutes(74), Duration.ofMinutes(76)),
+                result(true, Duration.ofHours(999), Duration.ofHours(999)),
+                result(false, Duration.ofMinutes(90), Duration.ofMinutes(90)),
+                result(false, Duration.ofMinutes(65), Duration.ofMinutes(70)),
+                result(true, Duration.ofHours(999), Duration.ofHours(999))
+        ));
+        assertThat(testPlayer.effectiveAverage(DROP_RESULTS)).isEqualTo(Duration.ofMinutes(82));
+    }
 
     private Result result(boolean isForfeit, Duration time, Duration agedTime) {
         Result result = mock(Result.class);
