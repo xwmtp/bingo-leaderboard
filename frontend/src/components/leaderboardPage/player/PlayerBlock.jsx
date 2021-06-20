@@ -6,8 +6,6 @@ import Tooltip from "./Tooltip";
 
 const PlayerDiv = styled.div`
     display: flex;
-
-
     @media (min-height: 620px) {
         position: sticky;
         top: -150px;
