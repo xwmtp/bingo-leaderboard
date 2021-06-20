@@ -6,8 +6,16 @@ import Tooltip from "./Tooltip";
 
 const PlayerDiv = styled.div`
     display: flex;
-    position: sticky;
-    top: 50px;
+
+
+    @media (min-height: 620px) {
+        position: sticky;
+        top: -150px;
+    }
+    @media (min-height: 830px) {
+        position: sticky;
+        top: 50px;
+    }
     align-self: flex-start;
     flex-direction: column;
     align-items: center;
