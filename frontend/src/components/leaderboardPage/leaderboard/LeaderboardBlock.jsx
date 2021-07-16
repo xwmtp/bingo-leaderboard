@@ -50,8 +50,8 @@ class LeaderboardBlock extends React.Component {
 
         },
         {
-            name: 'Median',
-            selector: 'effectiveMedian',
+            name: 'LB time',
+            selector: 'leaderboardTime',
             width: '90px',
             sortable: true,
             hide: 1300,
