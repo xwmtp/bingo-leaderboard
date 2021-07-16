@@ -20,16 +20,16 @@ public class LeaderboardEntry {
     private final String finishedRacesFraction;
     private int rank;
 
-    public LeaderboardEntry(Player player, int dropResults) {
+    public LeaderboardEntry(Player player, int numDropped, int numMax) {
 
         playerName = player.getName();
         playerId = player.getId();
         racetimePoints = player.getPoints();
-        leaderboardScore = player.leaderboardScore(dropResults);
-        leaderboardTime = formatDuration(player.leaderboardTime(dropResults));
+        leaderboardScore = player.leaderboardScore(numDropped, numMax);
+        leaderboardTime = formatDuration(player.leaderboardTime(numDropped, numMax));
         effectiveMedian = formatDuration(player.effectiveMedian());
         average = formatDuration(player.average());
-        effectiveAverage = formatDuration(player.effectiveAverage(dropResults));
+        effectiveAverage = formatDuration(player.effectiveAverage(numDropped, numMax));
         lastRaced = player.lastRaced().toString();
         finishedRacesCount = player.getFinishedRacesCount();
         includedRacesCount = player.getResults().size();

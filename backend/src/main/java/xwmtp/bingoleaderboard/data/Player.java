@@ -30,16 +30,16 @@ public class Player {
         forfeitTime = forfeitTime(results);
     }
 
-    public int leaderboardScore(int dropResults) {
-        Duration leaderboardTime = leaderboardTime(dropResults);
+    public int leaderboardScore(int numDropped, int numMax) {
+        Duration leaderboardTime = leaderboardTime(numDropped, numMax);
         long seconds = leaderboardTime.getSeconds();
         double scaled = (double) seconds / 6900 - 13.0 / 23.0; // 1:05 -> 0, 3:00 -> 1
         double sigmoided = 2 / (1 + Math.exp(4 * scaled));
         return (int) Math.round(sigmoided * 1000);
     }
 
-    public Duration leaderboardTime(int dropResults) {
-        final List<Duration> times = resultsWithoutWorst(dropResults).stream()
+    public Duration leaderboardTime(int numDropped, int numMax) {
+        final List<Duration> times = resultsWithoutWorst(numDropped, numMax).stream()
                 .map(r -> r.isForfeit() ? forfeitTime : r.timePenalizedByAge())
                 .collect(Collectors.toList());
         return Durations.average(times);
@@ -53,9 +53,9 @@ public class Player {
         return Durations.average(times);
     }
 
-    public Duration effectiveAverage(int dropResults) {
+    public Duration effectiveAverage(int numDropped, int numMax) {
         System.out.println(forfeitTime);
-        final List<Duration> times = resultsWithoutWorst(dropResults).stream()
+        final List<Duration> times = resultsWithoutWorst(numDropped, numMax).stream()
                 .map(r -> r.isForfeit() ? forfeitTime : r.getTime())
                 .collect(Collectors.toList());
         return Durations.average(times);
@@ -89,16 +89,19 @@ public class Player {
         return Collections.max(List.of(penalizedAverage, penalizedWorstTime));
     }
 
-    public List<Result> resultsWithoutWorst(int numWorst) {
-        int numIncludedRaces = racesLimit(numWorst);
+    public List<Result> resultsWithoutWorst(int numDropped, int numMax) {
+        int numIncludedRaces = racesLimit(numDropped, numMax);
+        System.out.println(numIncludedRaces);
         return results.stream()
                 .sorted(Comparator.comparing(Result::timePenalizedByAge))
                 .limit(numIncludedRaces)
                 .collect(Collectors.toList());
     }
 
-    public int racesLimit(int numDropped) {
-        return Math.max(results.size() - numDropped, numDropped);
+    public int racesLimit(int numDropped, int numMax) {
+        int scale = numMax / numDropped;
+        int numRacesDropped = results.size() / scale;
+        return results.size() - numRacesDropped;
     }
 
     private List<Duration> finishedTimes(List<Result> results) {

@@ -5,6 +5,6 @@ import xwmtp.bingoleaderboard.data.Player;
 @FunctionalInterface
 public interface LeaderboardEntryCreator {
 
-    LeaderboardEntry create(Player player, int dropResults);
+    LeaderboardEntry create(Player player, int numDropped, int numMax);
 
 }

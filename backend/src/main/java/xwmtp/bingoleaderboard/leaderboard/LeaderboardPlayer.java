@@ -16,11 +16,11 @@ public class LeaderboardPlayer {
     private final LeaderboardEntry leaderboardEntry;
     private final List<LeaderboardResult> results;
 
-    public LeaderboardPlayer(Player player, LeaderboardEntry entry, int dropResults) {
+    public LeaderboardPlayer(Player player, LeaderboardEntry entry, int dropResults, int numMax) {
         name = player.getName();
         id = player.getId();
         leaderboardEntry = entry;
-        int numConsidered = player.racesLimit(dropResults);
+        int numConsidered = player.racesLimit(dropResults, numMax);
         List<Result> sortedResults = player.getResults().stream()
                 .sorted(Comparator.comparing(Result::timePenalizedByAge))
                 .collect(Collectors.toList());

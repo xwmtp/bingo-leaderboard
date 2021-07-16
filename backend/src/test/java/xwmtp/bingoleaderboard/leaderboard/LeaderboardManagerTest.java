@@ -16,7 +16,7 @@ class LeaderboardManagerTest {
 
     private final DownloadData downloadDataMock = mock(DownloadData.class);
     private final LeaderboardManager leaderboardManager =
-            new LeaderboardManager(downloadDataMock, (p, i) -> mock(LeaderboardEntry.class));
+            new LeaderboardManager(downloadDataMock, (p, i, j) -> mock(LeaderboardEntry.class));
 
     @Test
     void makeLeaderboardPlayersFiltersOnFinishedRaceCount() {

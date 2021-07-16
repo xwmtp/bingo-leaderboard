@@ -36,7 +36,7 @@ public class LeaderboardManager {
     List<LeaderboardPlayer> makeLeaderboardPlayers(List<Player> players) {
         return players.stream()
                 .filter(p -> p.getFinishedRacesCount() > 0)
-                .map(p -> new LeaderboardPlayer(p, leaderboardEntryCreator.create(p, DROP_RESULTS), DROP_RESULTS))
+                .map(p -> new LeaderboardPlayer(p, leaderboardEntryCreator.create(p, DROP_RESULTS, MAX_RESULTS), DROP_RESULTS, MAX_RESULTS))
                 .collect(Collectors.toList());
     }
 

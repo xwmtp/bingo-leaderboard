@@ -18,7 +18,8 @@ class PlayerTest {
             result(false, Duration.ofMinutes(89), Duration.ofMinutes(89)),
             result(false, Duration.ofMinutes(65), Duration.ofMinutes(72))
     ));*/
-    private final int DROP_RESULTS = 1;
+    private final int DROP_RESULTS = 3;
+    private final int MAX_RESULTS = 15;
 
     // leaderboardScore
 
@@ -28,7 +29,7 @@ class PlayerTest {
         final int SECONDS_1H20 = 4800;
         int prev_score = Integer.MAX_VALUE;
         for (int i = SECONDS_1H05; i <= SECONDS_1H20; i++) {
-            int score = playerWithLeaderboardTime(Duration.ofSeconds(i)).leaderboardScore(DROP_RESULTS);
+            int score = playerWithLeaderboardTime(Duration.ofSeconds(i)).leaderboardScore(DROP_RESULTS, MAX_RESULTS);
             assertThat(score).isLessThanOrEqualTo(prev_score);
             prev_score = score;
         }
@@ -36,16 +37,16 @@ class PlayerTest {
 
     @Test
     void leaderboardScoreNotNegative() {
-        int scoreZeroSeconds = playerWithLeaderboardTime(Duration.ofSeconds(0)).leaderboardScore(DROP_RESULTS);
+        int scoreZeroSeconds = playerWithLeaderboardTime(Duration.ofSeconds(0)).leaderboardScore(DROP_RESULTS, MAX_RESULTS);
         assertThat(scoreZeroSeconds).isNotNegative();
 
-        int score24Hours = playerWithLeaderboardTime(Duration.ofHours(24)).leaderboardScore(DROP_RESULTS);
+        int score24Hours = playerWithLeaderboardTime(Duration.ofHours(24)).leaderboardScore(DROP_RESULTS, MAX_RESULTS);
         assertThat(score24Hours).isNotNegative();
     }
 
     @Test
     void leaderboardScoreIs1000ForA1H05() {
-        int score = playerWithLeaderboardTime(Duration.ofMinutes(65)).leaderboardScore(DROP_RESULTS);
+        int score = playerWithLeaderboardTime(Duration.ofMinutes(65)).leaderboardScore(DROP_RESULTS, MAX_RESULTS);
         assertThat(score).isEqualTo(1000);
     }
 
@@ -60,7 +61,7 @@ class PlayerTest {
                 result(false, Duration.ofMinutes(65), Duration.ofMinutes(70)),
                 result(true, Duration.ofHours(999), Duration.ofHours(999))
         ));
-        assertThat(testPlayer.leaderboardTime(DROP_RESULTS)).isEqualTo(Duration.ofMinutes(83));
+        assertThat(testPlayer.leaderboardTime(DROP_RESULTS, MAX_RESULTS)).isEqualTo(Duration.ofMinutes(83));
     }
 
     // average
@@ -88,7 +89,7 @@ class PlayerTest {
                 result(false, Duration.ofMinutes(65), Duration.ofMinutes(70)),
                 result(true, Duration.ofHours(999), Duration.ofHours(999))
         ));
-        assertThat(testPlayer.effectiveAverage(DROP_RESULTS)).isEqualTo(Duration.ofMinutes(82));
+        assertThat(testPlayer.effectiveAverage(DROP_RESULTS, MAX_RESULTS)).isEqualTo(Duration.ofMinutes(82));
     }
 
     private Result result(boolean isForfeit, Duration time, Duration agedTime) {
@@ -108,8 +109,8 @@ class PlayerTest {
 
     private Player playerWithLeaderboardTime(Duration time) {
         Player player = mock(Player.class);
-        when(player.leaderboardTime(anyInt())).thenReturn(time);
-        doCallRealMethod().when(player).leaderboardScore(anyInt());
+        when(player.leaderboardTime(anyInt(), anyInt())).thenReturn(time);
+        doCallRealMethod().when(player).leaderboardScore(anyInt(), anyInt());
         return player;
     }
 
