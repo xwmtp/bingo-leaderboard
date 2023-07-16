@@ -9,11 +9,11 @@
     "javascript-time-ago": "^2.3.4",
     "moment": "^2.29.1",
     "react": "^17.0.1",
-    "react-data-table": "^0.1.0",
+    "react-data-table": "^1.0.2",
     "react-data-table-component": "^7.0.0-alpha-5",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
+    "react-scripts": "^5.0.1",
     "react-time-ago": "^6.2.2",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
