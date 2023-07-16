@@ -14,7 +14,7 @@ public class RacetimeRace {
     private RacetimeRaceGoal goal = new RacetimeRaceGoal();
     private boolean recorded = false;
     private List<RacetimeRaceEntrant> entrants = new ArrayList<>();
-    private Pattern bingoGoalPattern = Pattern.compile("https://ootbingo\\.github\\.io/bingo/((?:v|beta)\\d+(?:\\.\\d+)*(?:-[A-Za-z]*)?)/bingo\\.html\\?(?:seed=\\d+&mode=normal|mode=normal+&seed=\\d+)");
+    private transient Pattern bingoGoalPattern = Pattern.compile("https://ootbingo\\.github\\.io/bingo/((?:v|beta)\\d+(?:\\.\\d+)*(?:-[A-Za-z]*)?)/bingo\\.html\\?(?:seed=\\d+&mode=normal|mode=normal+&seed=\\d+)");
 
     public String getName() {
         return name;
