@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk15:alpine
+FROM adoptopenjdk/openjdk17:alpine
 
 COPY backend/build/libs/bingo-leaderboard.jar /usr/bin
 
