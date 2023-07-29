@@ -1,0 +1,9 @@
+.gradle/
+.idea/
+
+frontend/node_modules
+frontend/build
+frontend/.eslintcache
+
+backend/build
+backend/src/main/resources/static
