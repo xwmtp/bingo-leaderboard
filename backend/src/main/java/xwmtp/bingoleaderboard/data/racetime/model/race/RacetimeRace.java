@@ -14,7 +14,8 @@ public class RacetimeRace {
     private RacetimeRaceGoal goal = new RacetimeRaceGoal();
     private boolean recorded = false;
     private List<RacetimeRaceEntrant> entrants = new ArrayList<>();
-    private Pattern bingoGoalPattern = Pattern.compile("https://ootbingo\\.github\\.io/bingo/((?:v|beta)\\d+(?:\\.\\d+)*(?:-[A-Za-z]*)?)/bingo\\.html\\?(?:seed=\\d+&mode=normal|mode=normal+&seed=\\d+)");
+    private Pattern bingoGoalPattern1 = Pattern.compile("https://ootbingo\\.github\\.io/bingo/((?:v|beta)\\d+(?:\\.\\d+)*(?:-[A-Za-z]*)?)/bingo\\.html\\?(?:seed=\\d+&mode=normal|mode=normal+&seed=\\d+)");
+    private Pattern bingoGoalPattern2 = Pattern.compile("https://ootbingo\\.github\\.io/bingo/bingo\\.html\\?.*version=((?:v|beta)?\\d+(?:\\.\\d+)*(?:-[A-Za-z]*)?).*");
 
     public String getName() {
         return name;
@@ -64,14 +65,6 @@ public class RacetimeRace {
         this.entrants = entrants;
     }
 
-    public Pattern getBingoGoalPattern() {
-        return bingoGoalPattern;
-    }
-
-    public void setBingoGoalPattern(Pattern bingoGoalPattern) {
-        this.bingoGoalPattern = bingoGoalPattern;
-    }
-
     @Override
     public String toString() {
         return "RacetimeRace{" +
@@ -99,11 +92,18 @@ public class RacetimeRace {
         }
         List<String> nonModes = List.of("short", "long", "blackout", "black out", "3x3", "4x4", "anti", "double", "bufferless", "child", "jp", "japanese", "bingo-j");
         for (String nonMode : nonModes) {
-            if (goal.getName().toLowerCase().contains(nonMode)) {
+            if (info.toLowerCase().contains(nonMode)) {
                 return false;
             }
         }
-        Matcher m = bingoGoalPattern.matcher(info);
-        return m.matches();
+
+        if (info.toLowerCase().contains("mode") && !info.toLowerCase().contains("mode=normal")) {
+            return false;
+        }
+
+        Matcher m1 = bingoGoalPattern1.matcher(info);
+        Matcher m2 = bingoGoalPattern2.matcher(info);
+
+        return m1.matches() || m2.matches();
     }
 }
