@@ -1,6 +1,7 @@
-version: '3.7'
+version: '3.9'
 services:
   bingo-leaderboard:
+    container_name: bingo-leaderboard
     build:
       context: .
     image: bingo-leaderboard
@@ -9,3 +10,8 @@ services:
     ports:
       - "14445:8080"
     restart: unless-stopped
+
+networks:
+  default:
+    name: nginx
+    external: true
