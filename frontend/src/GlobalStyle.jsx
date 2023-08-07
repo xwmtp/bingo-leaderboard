@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
     :root {
         --bg-color: #111111;
         --text-color: #bec7d2;
@@ -85,5 +85,3 @@ const GlobalStyle = createGlobalStyle`
     }
 
 `;
-
-export default GlobalStyle;
