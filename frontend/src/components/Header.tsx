@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, NavLinkProps } from "react-router-dom";
 
-export function Header() {
-  const linkStyle = ({ isActive }) => ({ color: isActive ? "white" : "lightGrey" });
+export const Header: React.FC = () => {
+  const linkStyle: NavLinkProps["style"] = ({ isActive }) => ({
+    color: isActive ? "white" : "lightGrey",
+  });
 
   return (
     <HeaderDiv id="header">
@@ -18,7 +20,7 @@ export function Header() {
       </Navigation>
     </HeaderDiv>
   );
-}
+};
 
 const HeaderDiv = styled.div`
   width: 100%;

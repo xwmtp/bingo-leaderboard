@@ -1,17 +1,17 @@
 import styled from "styled-components";
 import React from "react";
 
-export function AboutPage() {
+export const AboutPage: React.FC = () => {
   return (
     <AboutDiv id="about">
       <h2>Bingo Leaderboard</h2>
       <p>
         This is a leaderboard for Ocarina of Time Bingo. It only takes into account races that took
-        place on {racetime} in the 'Bingo' category and that used a normal {bingoCard}. For each
-        player, only their <span>15</span> most recent results count for the leaderboard. DQs are
-        ignored, but forfeits are included. A player that does not have any finished Bingo time will
-        not appear on the board yet. The leaderboard retrieves the latest data from Racetime once a
-        day at <span>9am UTC</span>.
+        place on <RacetimeLink /> in the 'Bingo' category and that used a normal <BingoCardLink />.
+        For each player, only their <span>15</span> most recent results count for the leaderboard.
+        DQs are ignored, but forfeits are included. A player that does not have any finished Bingo
+        time will not appear on the board yet. The leaderboard retrieves the latest data from
+        Racetime once a day at <span>9am UTC</span>.
       </p>
       <h2>Features</h2>
       <ul>
@@ -84,18 +84,23 @@ export function AboutPage() {
       </p>
     </AboutDiv>
   );
-}
+};
 
-const racetime = (
-  <a href="https://racetime.gg" target="_blank" rel="noreferrer">
-    Racetime.gg
-  </a>
-);
-const bingoCard = (
-  <a href="https://ootbingo.github.io/bingo" target="_blank" rel="noreferrer">
-    Bingo card
-  </a>
-);
+const RacetimeLink: React.FC = () => {
+  return (
+    <a href="https://racetime.gg" target="_blank" rel="noreferrer">
+      Racetime.gg
+    </a>
+  );
+};
+
+const BingoCardLink: React.FC = () => {
+  return (
+    <a href="https://ootbingo.github.io/bingo" target="_blank" rel="noreferrer">
+      Bingo card
+    </a>
+  );
+};
 
 const AboutDiv = styled.div`
   display: flex;

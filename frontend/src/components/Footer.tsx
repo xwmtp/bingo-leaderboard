@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 
-export function Footer() {
+export const Footer: React.FC = () => {
   return (
     <FooterDiv id="footer">
       <p>
@@ -15,7 +15,7 @@ export function Footer() {
       </p>
     </FooterDiv>
   );
-}
+};
 
 const FooterDiv = styled.div`
   width: 100%;

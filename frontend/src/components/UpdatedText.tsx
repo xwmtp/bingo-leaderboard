@@ -2,17 +2,21 @@ import styled from "styled-components";
 import React from "react";
 import Moment from "moment";
 
-export function LastUpdated(props) {
-  let text = "";
-  if (props.timestamp !== undefined) {
-    text = `Data last updated at ${Moment(props.timestamp).format("h:mm a (utcZ), D MMM  YYYY ")}`;
-  }
+interface Props {
+  timestamp?: string;
+}
+
+export const LastUpdated: React.FC<Props> = ({ timestamp }) => {
   return (
     <LastUpdatedDiv id="last-updated-text">
-      <p>{text}</p>
+      <p>
+        {timestamp
+          ? `Data last updated at ${Moment(timestamp).format("h:mm a (utcZ), D MMM  YYYY ")}`
+          : ""}
+      </p>
     </LastUpdatedDiv>
   );
-}
+};
 
 const LastUpdatedDiv = styled.div`
   min-height: 16px;

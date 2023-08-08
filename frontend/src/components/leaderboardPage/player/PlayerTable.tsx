@@ -1,66 +1,79 @@
 import React from "react";
 import styled from "styled-components";
-import DataTable from "react-data-table-component";
+import DataTable, { TableColumn } from "react-data-table-component";
 import { customStyles } from "../TableTheme.js";
 
-export function PlayerTable(props) {
-  const noTable = (
-    <NoTableDiv>
-      <p>Click on a leaderboard row to display player info.</p>
-    </NoTableDiv>
-  );
+interface Props {
+  data?: DataRow[];
+}
 
-  const table = (
+interface DataRow {
+  slug: string;
+  time: string;
+  agedTime: string;
+  forfeit: false;
+  date: string;
+  comment: string;
+  dropped: false;
+}
+
+export const PlayerTable: React.FC<Props> = ({ data }) => {
+  if (!data) {
+    return (
+      <NoTableDiv>
+        <p>Click on a leaderboard row to display player info.</p>
+      </NoTableDiv>
+    );
+  }
+
+  return (
     <TableDiv>
       <DataTable
         title="Leaderboard"
         columns={columns}
-        data={props.data.results}
+        data={data}
         theme="bingo"
         customStyles={customStyles}
         conditionalRowStyles={conditionalRowStyles}
         onRowClicked={onRowClicked}
-        noHeader="true"
-        noDataComponent={noTable}
+        noHeader={true}
         pointerOnHover={true}
       />
     </TableDiv>
   );
-
-  return props.data.name === "" ? noTable : table;
-}
+};
 
 const conditionalRowStyles = [
   {
-    when: (row) => row.dropped,
+    when: (row: DataRow) => row.dropped,
     style: {
       color: "grey",
     },
   },
 ];
 
-const onRowClicked = (row) => {
+const onRowClicked = (row: DataRow) => {
   window.open(`https://www.racetime.gg/${row.slug}`);
 };
 
-const columns = [
+const columns: TableColumn<DataRow>[] = [
   {
     name: "Time",
-    selector: "time",
+    selector: (row) => row.time,
     width: "105px",
     sortable: true,
     center: true,
   },
   {
     name: "Aged",
-    selector: "agedTime",
+    selector: (row) => row.agedTime,
     width: "105px",
     sortable: true,
     center: true,
   },
   {
     name: "Date",
-    selector: "date",
+    selector: (row) => row.date,
     sortable: true,
     width: "120px",
     center: true,
@@ -68,11 +81,11 @@ const columns = [
   },
   {
     name: "Comment",
-    selector: "comment",
+    selector: (row) => row.comment,
     sortable: false,
     maxWidth: "230px",
     hide: 1300,
-    left: true,
+    // left: true,
   },
 ];
 

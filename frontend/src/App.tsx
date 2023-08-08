@@ -6,31 +6,20 @@ import { AboutPage } from "./components/AboutPage";
 import { Footer } from "./components/Footer";
 import { LastUpdated } from "./components/UpdatedText";
 import { LeaderboardPage } from "./components/leaderboardPage/LeaderboardPage";
+import { getBingoLeaderboard } from "./service/bingoLeaderboardApi";
+import { BingoLeaderboard } from "./service/dataModels/bingoLeaderboardModels";
 
 export function App() {
-  const [leaderboardData, setLeaderboardData] = useState(undefined);
+  const [leaderboardData, setLeaderboardData] = useState<BingoLeaderboard | undefined>(undefined);
 
   useEffect(() => {
-    fetch(encodeURI(`${process.env.REACT_APP_BACKEND_URL}/leaderboard`), {
-      method: "get",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((r) => {
-        if (r.status / 100 !== 2) {
-          setLeaderboardData([]);
-          throw Error(r.status);
-        }
-        return r.json();
-      })
+    getBingoLeaderboard()
       .then((leaderboardData) => {
         setLeaderboardData(leaderboardData);
       })
-      .catch(() => {
-        setLeaderboardData([]);
-        console.log("Something went wrong while fetching the leaderboard data");
+      .catch((error) => {
+        setLeaderboardData(undefined);
+        console.error(error);
       });
   });
 
@@ -40,10 +29,10 @@ export function App() {
     <AppDiv id="app">
       <Router>
         <LastUpdated timestamp={timestamp} />
-        <Header id="header" />
+        <Header />
         <Routes>
           <Route path="/" element={<LeaderboardPage leaderboardData={leaderboardData} />} />
-          <Route path="/about" component={AboutPage} />
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
         <Footer />
       </Router>

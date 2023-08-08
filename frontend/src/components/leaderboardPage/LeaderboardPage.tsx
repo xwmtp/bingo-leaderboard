@@ -3,44 +3,40 @@ import React, { useEffect, useState } from "react";
 import "./TableTheme.js";
 import { PlayerBlock } from "./player/PlayerBlock";
 import { LeaderboardBlock } from "./leaderboard/LeaderboardBlock";
+import {
+  BingoLeaderboard,
+  BingoLeaderboardPlayers,
+} from "../../service/dataModels/bingoLeaderboardModels";
+import { getBingoPlayers } from "../../service/bingoLeaderboardApi";
 
-export function LeaderboardPage({ leaderboardData }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [playerData, setPlayerData] = useState([]);
-  const [selectedPlayerName, setSelectedPlayerName] = useState(undefined);
+interface Props {
+  leaderboardData?: BingoLeaderboard;
+}
+
+export const LeaderboardPage: React.FC<Props> = ({ leaderboardData }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [playerData, setPlayerData] = useState<BingoLeaderboardPlayers>([]);
+  const [selectedPlayerName, setSelectedPlayerName] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    fetch(encodeURI(`${process.env.REACT_APP_BACKEND_URL}/players`), {
-      method: "get",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((r) => {
-        if (r.status / 100 !== 2) {
-          setPlayerData([]);
-          throw Error(r.status);
-        }
-        return r.json();
-      })
+    getBingoPlayers()
       .then((playerData) => {
-        setPlayerData(playerData?.data ?? []);
+        setPlayerData(playerData);
       })
-      .catch(() => console.log("Could not download player data."))
+      .catch((error) => console.error(error))
       .finally(() => setIsLoading(false));
   }, []);
 
   const playerTableData =
     playerData.length > 0 && selectedPlayerName !== undefined
       ? playerData.find((player) => player.name === selectedPlayerName)
-      : { name: "", leaderboardEntry: [], results: [] };
+      : undefined;
 
   if (leaderboardData === undefined) {
     return <EmptyDiv id="empty" />;
   }
 
-  if (leaderboardData.length === 0) {
+  if (leaderboardData.entries.length === 0) {
     return (
       <NoDataDiv id="no-data">
         <p>Currently no data available.</p>
@@ -51,13 +47,13 @@ export function LeaderboardPage({ leaderboardData }) {
   return (
     <LeaderboardPageDiv id="leaderboard-page">
       <LeaderboardBlock
-        data={leaderboardData}
+        data={leaderboardData.entries}
         onRowClick={(row) => setSelectedPlayerName(row.playerName)}
       />
       <PlayerBlock data={playerTableData} />
     </LeaderboardPageDiv>
   );
-}
+};
 
 const LeaderboardPageDiv = styled.div`
   display: flex;
