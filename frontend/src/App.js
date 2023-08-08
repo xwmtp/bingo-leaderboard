@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Header } from "./components/Header";
 import { AboutPage } from "./components/AboutPage";
 import { Footer } from "./components/Footer";
@@ -41,14 +41,10 @@ export function App() {
       <Router>
         <LastUpdated timestamp={timestamp} />
         <Header id="header" />
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => <LeaderboardPage leaderboardData={leaderboardData} />}
-          />
+        <Routes>
+          <Route path="/" element={<LeaderboardPage leaderboardData={leaderboardData} />} />
           <Route path="/about" component={AboutPage} />
-        </Switch>
+        </Routes>
         <Footer />
       </Router>
     </AppDiv>

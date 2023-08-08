@@ -3,14 +3,16 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 export function Header() {
+  const linkStyle = ({ isActive }) => ({ color: isActive ? "white" : "lightGrey" });
+
   return (
     <HeaderDiv id="header">
       <h1>Ocarina of Time Bingo</h1>
       <Navigation>
-        <Link to="/" activeClassName="current" exact>
+        <Link to="/" style={linkStyle}>
           Leaderboard
         </Link>
-        <Link to="/about" activeClassName="current" exact>
+        <Link to="/about" style={linkStyle}>
           About
         </Link>
       </Navigation>
@@ -24,10 +26,7 @@ const HeaderDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px 0px 30px 0px;
-  .current {
-    color: white;
-  }
+  padding: 20px 0 30px 0;
 `;
 
 const Navigation = styled.div`
