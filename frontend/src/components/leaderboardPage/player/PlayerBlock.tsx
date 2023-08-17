@@ -9,13 +9,31 @@ interface Props {
   data?: BingoLeaderboardPlayer;
 }
 
-export const PlayerBlock: React.FC<Props> = (props) => {
-  const playerInfo = !props.data ? (
-    <></>
-  ) : (
-    <PlayerInfo>
-      <a href={`https://racetime.gg/user/${props.data.id}`} target="_blank" rel="noreferrer">
-        <h2>{`#${props.data.leaderboardEntry.rank} ${props.data.name}`}</h2>
+export const PlayerBlock: React.FC<Props> = ({ data }) => {
+  if (!data) {
+    return (
+      <PlayerDiv id="player-div">
+        <NoTableDiv>
+          <p>Click on a leaderboard row to display player info.</p>
+        </NoTableDiv>
+      </PlayerDiv>
+    );
+  }
+
+  return (
+    <PlayerDiv id="player-div">
+      <PlayerInfo data={data} />
+      <PlayerTable data={data.results} />
+      <PlayerExplanation />
+    </PlayerDiv>
+  );
+};
+
+const PlayerInfo: React.FC<{ data: BingoLeaderboardPlayer }> = ({ data }) => {
+  return (
+    <PlayerInfoDiv>
+      <a href={`https://racetime.gg/user/${data.id}`} target="_blank" rel="noreferrer">
+        <h2>{`#${data.leaderboardEntry.rank} ${data.name}`}</h2>
       </a>
       <PlayerStats>
         <PlayerTimes>
@@ -23,23 +41,23 @@ export const PlayerBlock: React.FC<Props> = (props) => {
             <Tooltip
               title="average time"
               textHeader="average time"
-              text={`Average of the times ${props.data.name} got in their latest 15 races. Ignores unfinished races, therefore favors those with more forfeits.`}
+              text={`Average of the times ${data.name} got in their latest 15 races. Ignores unfinished races, therefore favors those with more forfeits.`}
             />
             <Tooltip
               title="median time"
               textHeader="median time"
-              text={`Median of the times ${props.data.name} got in their latest 15 races. Unfinished races are replaced with the worst time of the finished races. Compared to average, this is a fairer metric when it comes to forfeits.`}
+              text={`Median of the times ${data.name} got in their latest 15 races. Unfinished races are replaced with the worst time of the finished races. Compared to average, this is a fairer metric when it comes to forfeits.`}
             />
             <Tooltip
               title="leaderboard time"
               textHeader="leaderboard time"
-              text={`Average of the aged times of ${props.data.name}'s latest 15 races, but ignores the worst 3 aged times (gray rows in the table). Learn more about how the leaderboard time is calculated on the 'About' page.`}
+              text={`Average of the aged times of ${data.name}'s latest 15 races, but ignores the worst 3 aged times (gray rows in the table). Learn more about how the leaderboard time is calculated on the 'About' page.`}
             />
           </StatColumn>
           <StatColumn>
-            <p>{props.data.leaderboardEntry.average}</p>
-            <p>{props.data.leaderboardEntry.effectiveMedian}</p>
-            <p>{props.data.leaderboardEntry.leaderboardTime}</p>
+            <p>{data.leaderboardEntry.average}</p>
+            <p>{data.leaderboardEntry.effectiveMedian}</p>
+            <p>{data.leaderboardEntry.leaderboardTime}</p>
           </StatColumn>
         </PlayerTimes>
         <PlayerTimes>
@@ -47,37 +65,29 @@ export const PlayerBlock: React.FC<Props> = (props) => {
             <Tooltip
               title="leaderboard score"
               textHeader="leaderboard score"
-              text={`Directly tied to the leaderboard time. Decreases over time when a player isn't active.`}
+              text="Directly tied to the leaderboard time. Decreases over time when a player isn't active."
             />
             <p>racetime points</p>
           </StatColumn>
           <StatColumn className="align-right">
-            <p>{props.data.leaderboardEntry.leaderboardScore}</p>
-            <p>{props.data.leaderboardEntry.racetimePoints}</p>
+            <p>{data.leaderboardEntry.leaderboardScore}</p>
+            <p>{data.leaderboardEntry.racetimePoints}</p>
           </StatColumn>
         </PlayerTimes>
       </PlayerStats>
-    </PlayerInfo>
+    </PlayerInfoDiv>
   );
+};
 
-  const playerExplanation = !props.data ? (
-    <></>
-  ) : (
-    <PlayerExplanation>
+const PlayerExplanation: React.FC = () => {
+  return (
+    <PlayerExplanationDiv>
       <p>Click on a row/player title to go to the Racetime page.</p>
       <p>
         Hover over the stats for an explanation, or visit the <Link to="/about">About</Link> page to
         learn more.
       </p>
-    </PlayerExplanation>
-  );
-
-  return (
-    <PlayerDiv id="player-div">
-      {playerInfo}
-      <PlayerTable data={props.data?.results} />
-      {playerExplanation}
-    </PlayerDiv>
+    </PlayerExplanationDiv>
   );
 };
 
@@ -108,7 +118,7 @@ const PlayerDiv = styled.div`
   }
 `;
 
-const PlayerInfo = styled.div`
+const PlayerInfoDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,7 +147,7 @@ const StatColumn = styled.div`
   margin: 0px 5px;
 `;
 
-const PlayerExplanation = styled.div`
+const PlayerExplanationDiv = styled.div`
   color: grey;
   width: 100%;
   font-size: 14px;
@@ -151,4 +161,13 @@ const Link = styled(NavLink)`
   color: var(--light-gray);
   font-weight: bold;
   text-decoration: none;
+`;
+
+const NoTableDiv = styled.div`
+  display: flex;
+  position: sticky;
+  top: 50px;
+  color: grey;
+  margin-top: 100px;
+  height: 100%;
 `;

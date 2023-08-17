@@ -4,7 +4,7 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { customStyles } from "../TableTheme.js";
 
 interface Props {
-  data?: DataRow[];
+  data: DataRow[];
 }
 
 interface DataRow {
@@ -18,14 +18,6 @@ interface DataRow {
 }
 
 export const PlayerTable: React.FC<Props> = ({ data }) => {
-  if (!data) {
-    return (
-      <NoTableDiv>
-        <p>Click on a leaderboard row to display player info.</p>
-      </NoTableDiv>
-    );
-  }
-
   return (
     <TableDiv>
       <DataTable
@@ -92,13 +84,4 @@ const columns: TableColumn<DataRow>[] = [
 const TableDiv = styled.div`
   font-size: 16px;
   margin-bottom: 20px;
-`;
-
-const NoTableDiv = styled.div`
-  display: flex;
-  position: sticky;
-  top: 50px;
-  color: grey;
-  margin-top: 100px;
-  height: 100%;
 `;

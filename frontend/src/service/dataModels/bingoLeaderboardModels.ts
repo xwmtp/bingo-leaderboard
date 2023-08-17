@@ -29,7 +29,7 @@ export interface BingoLeaderboardPlayer {
   results: BingoLeaderboardResult[];
 }
 
-interface BingoLeaderboardResult {
+export interface BingoLeaderboardResult {
   slug: string;
   time: string;
   agedTime: string;
