@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import xwmtp.bingoleaderboard.leaderboard.Leaderboard;
 import xwmtp.bingoleaderboard.leaderboard.LeaderboardManager;
-import xwmtp.bingoleaderboard.leaderboard.LeaderboardEntry;
 import xwmtp.bingoleaderboard.leaderboard.LeaderboardPlayer;
 
 import java.util.List;
@@ -35,11 +34,10 @@ public class Endpoints {
 
     @GetMapping("api/players/{name}")
     public LeaderboardPlayer player(@PathVariable("name") String name) {
-        LeaderboardPlayer player = leaderboardManager.getPlayers().stream()
+        return leaderboardManager.getPlayers().stream()
                 .filter(e -> e.getName().equalsIgnoreCase(name))
                 .findFirst()
                 .orElse(null);
-        return player;
     }
 }
 

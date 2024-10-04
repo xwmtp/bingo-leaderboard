@@ -48,6 +48,9 @@ public class DownloadData {
                 .limit(limit)
                 .toList();
         for (RacetimeRanking ranking : rankings) {
+            if (ranking.getUser() == null) {
+                continue;
+            }
             logger.trace("Downloading player {}...", ranking.getUser().getName());
             List<Result> results = downloadRacetimeResults(ranking, maxResults);
             logger.trace("Downloaded ({}) times: {} ", results.size(), results.stream().map(r-> Durations.formatDuration(r.getTime())).collect(Collectors.toList()));

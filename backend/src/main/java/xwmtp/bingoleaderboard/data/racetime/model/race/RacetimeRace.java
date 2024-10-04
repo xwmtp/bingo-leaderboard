@@ -83,6 +83,7 @@ public class RacetimeRace {
         }
 
         return entrants.stream()
+                .filter(s -> s.getUser() != null)
                 .filter(s -> s.getUser().getId().equalsIgnoreCase(playerId))
                 .findFirst()
                 .filter(RacetimeRaceEntrant::hasValidFinish)

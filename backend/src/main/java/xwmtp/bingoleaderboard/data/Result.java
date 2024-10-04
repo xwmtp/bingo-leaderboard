@@ -20,6 +20,7 @@ public class Result {
 
     public Result(RacetimeRace race, String userId) {
         RacetimeRaceEntrant entrant = race.getEntrants().stream()
+                .filter(s -> s.getUser() != null)
                 .filter(s -> s.getUser().getId().equalsIgnoreCase(userId))
                 .findFirst()
                 .orElse(null);
@@ -72,7 +73,7 @@ public class Result {
     }
 
     public Duration getTime() {
-        return time == null? Duration.ofHours(999) : time;
+        return time == null ? Duration.ofHours(999) : time;
     }
 
     public boolean isForfeit() {
