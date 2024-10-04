@@ -84,7 +84,7 @@ public class DownloadData {
 
     private RacetimeRacesPage downloadRacetimeRacesPage(String userId, int page) {
         try {
-            String racetimeRacesData = getRequest("https://racetime.gg/user/" + userId + "/races/data?show_entrants=true&per_page=100&page=" + page);
+            String racetimeRacesData = getRequest("https://racetime.gg/user/" + userId + "/races/data?show_entrants=true&per_page=30&page=" + page);
 
             RacetimeRacesPage racesPage = gson.fromJson(racetimeRacesData, RacetimeRacesPage.class);
             return racesPage;
