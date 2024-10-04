@@ -54,7 +54,6 @@ public class Player {
     }
 
     public Duration effectiveAverage(int numDropped, int numMax) {
-        System.out.println(forfeitTime);
         final List<Duration> times = resultsWithoutWorst(numDropped, numMax).stream()
                 .map(r -> r.isForfeit() ? forfeitTime : r.getTime())
                 .collect(Collectors.toList());
@@ -91,7 +90,6 @@ public class Player {
 
     public List<Result> resultsWithoutWorst(int numDropped, int numMax) {
         int numIncludedRaces = racesLimit(numDropped, numMax);
-        System.out.println(numIncludedRaces);
         return results.stream()
                 .sorted(Comparator.comparing(Result::timePenalizedByAge))
                 .limit(numIncludedRaces)
