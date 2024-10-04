@@ -2,14 +2,14 @@ FROM node:18-alpine as frontend
 COPY frontend .
 RUN npm i && npm run build
 
-FROM eclipse-temurin:17-alpine as backend
+FROM eclipse-temurin:21-alpine as backend
 COPY backend .
 COPY gradle gradle/
 COPY gradlew .
 COPY --from=frontend build src/main/resources/static
 RUN ./gradlew build -x test
 
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:21-jre-alpine
 
 COPY --from=backend build/libs/bingo-leaderboard.jar /usr/bin
 
