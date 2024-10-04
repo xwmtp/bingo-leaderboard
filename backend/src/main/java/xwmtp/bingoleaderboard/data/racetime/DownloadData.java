@@ -46,7 +46,7 @@ public class DownloadData {
         List<Player> players = new ArrayList<>();
         List<RacetimeRanking> rankings = leaderboard.getRankings().stream()
                 .limit(limit)
-                .collect(Collectors.toList());
+                .toList();
         for (RacetimeRanking ranking : rankings) {
             logger.trace("Downloading player {}...", ranking.getUser().getName());
             List<Result> results = downloadRacetimeResults(ranking, maxResults);

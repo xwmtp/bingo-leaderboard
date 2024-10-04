@@ -78,12 +78,15 @@ public class RacetimeRace {
     }
 
     public boolean isValidBingoResultFor(String playerId) {
-        boolean playerFinished = entrants.stream()
+        if (!isValidBingoRace()) {
+            return false;
+        }
+
+        return entrants.stream()
                 .filter(s -> s.getUser().getId().equalsIgnoreCase(playerId))
                 .findFirst()
                 .filter(RacetimeRaceEntrant::hasValidFinish)
                 .isPresent();
-        return playerFinished && isValidBingoRace();
     }
 
     public boolean isValidBingoRace() {
