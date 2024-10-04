@@ -1,6 +1,6 @@
 FROM node:18-alpine as frontend
 COPY frontend .
-RUN npm i && npm run build
+RUN npm i --legacy-peer-deps && npm run build
 
 FROM eclipse-temurin:21-alpine as backend
 COPY backend .
