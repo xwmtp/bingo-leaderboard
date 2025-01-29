@@ -11,7 +11,7 @@ export const Header: React.FC<Props> = ({dateTime}) => {
   return (
     <HeaderDiv>
       <div>
-        <Link to="/bingo-leaderboard-frontend">
+        <Link to="/bingo-leaderboard">
           <h1>OoT Bingo Leaderboard</h1>
         </Link>
         <LastUpdated dateTime={dateTime} />

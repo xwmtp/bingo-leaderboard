@@ -20,7 +20,7 @@ export function App() {
         <Header dateTime={leaderboardData?.lastUpdated} />
         <Routes>
           <Route
-            path="/bingo-leaderboard-frontend"
+            path="/bingo-leaderboard"
             element={<LeaderboardPage leaderboardData={leaderboardData} />}
           />
           <Route path="/about" element={<AboutPage />} />
