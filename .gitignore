@@ -5,6 +5,7 @@ frontend/.eslintcache
 # dependencies
 frontend/node_modules
 frontend/.pnp
+frontend/dist/
 .pnp.js
 
 # testing
