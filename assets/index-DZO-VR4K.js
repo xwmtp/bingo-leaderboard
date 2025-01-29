@@ -91,7 +91,7 @@ Please change the parent <Route path="${_}"> to <Route path="${_==="/"?"*":`${_}
   font-size: 13px;
   color: var(--text-color);
   opacity: 0.8;
-`,Bx=({dateTime:r})=>M.jsxs(Qx,{children:[M.jsxs("div",{children:[M.jsx(Lm,{to:"/bingo-leaderboard-frontend",children:M.jsx("h1",{children:"OoT Bingo Leaderboard"})}),M.jsx(bx,{dateTime:r})]}),M.jsx(Lm,{to:"/about",children:M.jsx("h2",{children:"About"})})]}),Qx=we.div`
+`,Bx=({dateTime:r})=>M.jsxs(Qx,{children:[M.jsxs("div",{children:[M.jsx(Lm,{to:"/bingo-leaderboard",children:M.jsx("h1",{children:"OoT Bingo Leaderboard"})}),M.jsx(bx,{dateTime:r})]}),M.jsx(Lm,{to:"/about",children:M.jsx("h2",{children:"About"})})]}),Qx=we.div`
   background-color: var(--row-color);
   width: 100%;
   display: flex;
@@ -330,7 +330,7 @@ Please change the parent <Route path="${_}"> to <Route path="${_==="/"?"*":`${_}
 `,pC=we.div`
   display: flex;
   height: 100%;
-`,mC=()=>M.jsx("div",{children:M.jsx("h3",{children:"This page does not exist"})});function yC(){const{data:r}=a0({queryKey:["getBingoLeaderboard"],queryFn:()=>RE()});return M.jsx(gC,{id:"app",children:M.jsxs(PS,{children:[M.jsx(Bx,{dateTime:r==null?void 0:r.lastUpdated}),M.jsxs(oS,{children:[M.jsx(Bl,{path:"/bingo-leaderboard-frontend",element:M.jsx(uC,{leaderboardData:r})}),M.jsx(Bl,{path:"/about",element:M.jsx(qx,{})}),M.jsx(Bl,{path:"*",element:M.jsx(mC,{})})]}),M.jsx(Kx,{})]})})}const gC=we.div`
+`,mC=()=>M.jsx("div",{children:M.jsx("h3",{children:"This page does not exist"})});function yC(){const{data:r}=a0({queryKey:["getBingoLeaderboard"],queryFn:()=>RE()});return M.jsx(gC,{id:"app",children:M.jsxs(PS,{children:[M.jsx(Bx,{dateTime:r==null?void 0:r.lastUpdated}),M.jsxs(oS,{children:[M.jsx(Bl,{path:"/bingo-leaderboard",element:M.jsx(uC,{leaderboardData:r})}),M.jsx(Bl,{path:"/about",element:M.jsx(qx,{})}),M.jsx(Bl,{path:"*",element:M.jsx(mC,{})})]}),M.jsx(Kx,{})]})})}const gC=we.div`
   height: 100%;
   display: flex;
   flex-direction: column;
