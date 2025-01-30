@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {LastUpdated} from "./UpdatedText.tsx";
+import {LastUpdated} from "./LastUpdated.tsx";
 import {NavLink} from "react-router-dom";
 
 interface Props {
