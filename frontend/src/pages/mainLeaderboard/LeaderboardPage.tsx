@@ -7,7 +7,7 @@ import {getBingoPlayers} from "../../api/bingoLeaderboardApi.ts";
 import {useQuery} from "@tanstack/react-query";
 
 interface Props {
-  leaderboardData?: BingoLeaderboardData;
+  leaderboardData: BingoLeaderboardData;
 }
 
 export const LeaderboardPage: React.FC<Props> = ({leaderboardData}) => {
@@ -22,10 +22,6 @@ export const LeaderboardPage: React.FC<Props> = ({leaderboardData}) => {
     playerData && playerData.length > 0 && selectedPlayerName !== undefined
       ? playerData.find((player) => player.name === selectedPlayerName)
       : undefined;
-
-  if (leaderboardData === undefined) {
-    return <EmptyDiv id="empty" />;
-  }
 
   if (leaderboardData.tableData.rows.length === 0) {
     return (
@@ -80,10 +76,5 @@ const ContentRight = styled.div`
 const NoDataDiv = styled.div`
   display: flex;
   margin-top: 7rem;
-  height: 100%;
-`;
-
-const EmptyDiv = styled.div`
-  display: flex;
   height: 100%;
 `;
