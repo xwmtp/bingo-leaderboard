@@ -33,7 +33,7 @@ const HeaderDiv = styled.div`
   justify-content: space-between;
   padding: 12px 40px;
   min-height: 84px;
-    column-gap: 8px;
+  column-gap: 8px;
 `;
 
 const Link = styled(NavLink)`
