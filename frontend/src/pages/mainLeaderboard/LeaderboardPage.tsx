@@ -62,6 +62,7 @@ const LeaderboardPageDiv = styled.div`
 
   @media screen and (max-width: 768px) {
     font-size: 10px;
+    padding: 0 8px;
   }
 `;
 

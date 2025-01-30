@@ -38,4 +38,8 @@ const AppDiv = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 30px;
+
+  @media screen and (max-width: 768px) {
+    row-gap: 10px;
+  }
 `;

@@ -10,12 +10,12 @@ interface Props {
 export const Header: React.FC<Props> = ({dateTime}) => {
   return (
     <HeaderDiv>
-      <div>
+      <ContentLeft>
         <Link to="/bingo-leaderboard">
           <h1>OoT Bingo Leaderboard</h1>
         </Link>
         <LastUpdated dateTime={dateTime} />
-      </div>
+      </ContentLeft>
 
       <Link to="/bingo-leaderboard/about">
         <h2>About</h2>
@@ -23,6 +23,12 @@ export const Header: React.FC<Props> = ({dateTime}) => {
     </HeaderDiv>
   );
 };
+
+const ContentLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+`;
 
 const HeaderDiv = styled.div`
   background-color: var(--row-color);
@@ -34,6 +40,10 @@ const HeaderDiv = styled.div`
   padding: 12px 40px;
   min-height: 84px;
   column-gap: 8px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
 `;
 
 const Link = styled(NavLink)`

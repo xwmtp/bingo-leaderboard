@@ -36,4 +36,8 @@ const LastUpdatedDiv = styled.div`
   font-size: 13px;
   color: var(--text-color);
   opacity: 0.8;
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
 `;
