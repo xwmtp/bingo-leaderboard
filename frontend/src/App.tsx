@@ -23,7 +23,7 @@ export function App() {
             path="/bingo-leaderboard"
             element={<LeaderboardPage leaderboardData={leaderboardData} />}
           />
-          <Route path="/about" element={<AboutPage />} />
+          <Route path="bingo-leaderboard/about" element={<AboutPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
