@@ -59,6 +59,10 @@ const LeaderboardPageDiv = styled.div`
   justify-content: center;
   column-gap: 50px;
   padding: 0 20px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
 `;
 
 const ContentLeft = styled.div`

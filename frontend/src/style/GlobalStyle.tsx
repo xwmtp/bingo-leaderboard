@@ -29,14 +29,6 @@ export const GlobalStyle = createGlobalStyle`
         background-color: var(--bg-color);
         color: var(--text-color);
         font-family: 'Roboto', Helvetica, Arial, sans-serif;
-        
-        @media screen and (max-width: 768px) {
-            font-size: 10px;
-        }
-    }
-
-    p {
-        //text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
     }
 
     h1, h2, h3 {
