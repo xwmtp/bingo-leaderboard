@@ -65,13 +65,13 @@ const Stats = styled.div`
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 1.3rem;
 `;
 
 const StatColumn = styled.div`
   display: flex;
   width: 40%;
-  max-width: 210px;
+  max-width: 14rem;
   flex-direction: column;
   justify-content: center;
 `;
@@ -80,7 +80,7 @@ const StatRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 1px 0;
+  padding: 0.1rem 0;
   width: 100%;
   transition: color 0.2s ease;
   &:hover {

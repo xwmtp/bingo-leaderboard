@@ -18,6 +18,5 @@ export const PlayerTableBlock: React.FC<Props> = ({raceResults}) => {
 };
 
 const TableDiv = styled.div`
-  font-size: 16px;
   width: 100%;
 `;

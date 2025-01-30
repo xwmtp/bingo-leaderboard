@@ -47,8 +47,8 @@ export function PlayerTable({tableData}: Props) {
 }
 
 const TableStyled = styled(TableWrapper)`
-  row-gap: 4px;
-  column-gap: 20px;
+  row-gap: 0.3rem;
+  column-gap: 1.3rem;
 `;
 
 const TableRowStyled = styled(TableRow)<{$isDropped: boolean}>`

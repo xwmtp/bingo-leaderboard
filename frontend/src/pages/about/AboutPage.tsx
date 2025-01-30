@@ -105,7 +105,7 @@ const BingoCardLink: React.FC = () => {
 const AboutDiv = styled.div`
   display: flex;
   width: 70%;
-  max-width: 850px;
+  max-width: 56rem;
   flex-grow: 1;
   flex-direction: column;
   line-height: 1.3;
@@ -115,14 +115,14 @@ const AboutDiv = styled.div`
     text-decoration: none;
   }
   p {
-    font-size: 17px;
+    font-size: 1.1rem;
   }
   ul,
   p {
-    margin: 10px 0 20px 0;
+    margin: 0.7rem 0 1.3rem 0;
   }
   ul {
-    margin: 10px 0 20px 30px;
+    margin: 0.7rem 0 1.3rem 2rem;
   }
   span {
     font-weight: bold;

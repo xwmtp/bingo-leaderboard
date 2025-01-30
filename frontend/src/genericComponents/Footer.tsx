@@ -19,12 +19,12 @@ export const Footer: React.FC = () => {
 
 const FooterDiv = styled.div`
   width: 100%;
-  font-size: 14px;
+  font-size: 0.9rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 1.3rem;
   p {
     color: grey;
   }

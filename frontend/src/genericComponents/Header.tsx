@@ -27,7 +27,8 @@ export const Header: React.FC<Props> = ({dateTime}) => {
 const ContentLeft = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 4px;
+  row-gap: 0.3rem;
+  align-items: flex-start;
 `;
 
 const HeaderDiv = styled.div`
@@ -37,13 +38,9 @@ const HeaderDiv = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 40px;
-  min-height: 84px;
-  column-gap: 8px;
-
-  @media screen and (max-width: 768px) {
-    font-size: 10px;
-  }
+  padding: 0.8rem 2.7rem;
+  min-height: 5.6rem;
+  column-gap: 0.5rem;
 `;
 
 const Link = styled(NavLink)`

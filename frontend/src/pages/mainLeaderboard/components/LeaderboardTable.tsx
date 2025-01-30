@@ -44,8 +44,8 @@ export function LeaderboardTable<TRowData extends RowDataWithIndex>({
 
 const TableStyled = styled(TableWrapper)`
   width: 100%;
-  row-gap: 4px;
-  column-gap: 6px;
+  row-gap: 0.3rem;
+  column-gap: 0.4rem;
 `;
 
 const TableRowStyled = styled(TableRow)``;

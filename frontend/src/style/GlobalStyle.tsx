@@ -1,5 +1,11 @@
 import {createGlobalStyle} from "styled-components";
 
+export const ScreenWidths = {
+  smallPhone: 425,
+  phone: 550,
+  tablet: 768,
+} as const;
+
 export const GlobalStyle = createGlobalStyle`
     :root {
         --bg-color: #111111;
@@ -17,10 +23,15 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
     }
-
+    
     html {
         height: 100%;
         overflow-y: scroll;
+        font-size: 95%;
+
+        @media (max-width: ${ScreenWidths.tablet}px) {
+            font-size: 60%;
+        }
     }
 
     body {

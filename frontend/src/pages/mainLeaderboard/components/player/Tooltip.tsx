@@ -31,27 +31,27 @@ const WithTooltipContainer = styled.div`
 
 const Tooltip = styled.span`
   visibility: hidden;
-  width: 200px;
+  width: 13rem;
   background-color: var(--yellow);
   color: black;
   font-weight: normal;
-  font-size: 13px;
+  font-size: 0.9rem;
   text-align: center;
-  border-radius: 6px;
-  padding: 5px;
+  border-radius: 0.4rem;
+  padding: 0.3rem;
   position: absolute;
   z-index: 1;
   top: 150%;
   left: 50%;
-  margin-left: -100px;
+  margin-left: -6.7rem;
 
   &::after {
     content: "";
     position: absolute;
     bottom: 100%;
     left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
+    margin-left: -0.3rem;
+    border-width: 0.3rem;
     border-style: solid;
     border-color: transparent transparent var(--yellow) transparent;
   }

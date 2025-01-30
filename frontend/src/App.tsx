@@ -37,9 +37,5 @@ const AppDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 30px;
-
-  @media screen and (max-width: 768px) {
-    row-gap: 10px;
-  }
+  row-gap: 2rem;
 `;

@@ -29,9 +29,5 @@ export function TableHeader<TRowData extends RowDataWithIndex>({
 }
 
 const SortIcon = styled.div`
-  width: 18px;
-
-  @media screen and (max-width: 768px) {
-    width: 10px;
-  }
+  width: 1.2rem;
 `;

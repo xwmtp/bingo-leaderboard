@@ -39,27 +39,27 @@ const PlayerName: React.FC<{player: BingoPlayer}> = ({player}) => {
 const PlayerDiv = styled.div`
   display: flex;
   flex-direction: column;
-  @media (min-height: 620px) {
+  @media (min-height: 41rem) {
     position: sticky;
-    top: -150px;
+    top: -10rem;
   }
-  @media (min-height: 830px) {
+  @media (min-height: 53rem) {
     position: sticky;
-    top: 50px;
+    top: 3.3rem;
   }
   align-self: flex-start;
   align-items: center;
   width: 100%;
-  padding-top: 10px;
-  row-gap: 30px;
+  padding-top: 0.7rem;
+  row-gap: 2rem;
 `;
 
 const NoTableDiv = styled.div`
   display: flex;
   position: sticky;
-  top: 50px;
+  top: 3.3rem;
   color: grey;
-  margin-top: 100px;
+  margin-top: 6.7rem;
   height: 100%;
 `;
 

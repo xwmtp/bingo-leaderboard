@@ -33,11 +33,7 @@ export const LastUpdated: React.FC<Props> = ({dateTime}) => {
 const LastUpdatedDiv = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 13px;
+  font-size: 0.9rem;
   color: var(--text-color);
   opacity: 0.8;
-
-  @media screen and (max-width: 768px) {
-    font-size: 10px;
-  }
 `;

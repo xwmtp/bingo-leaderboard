@@ -37,7 +37,7 @@ export function Table<TRowData extends RowDataWithIndex>({tableData, onRowClick}
 const GridWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(6, auto);
-  gap: 4px;
+  gap: 0.3rem;
 `;
 
 const GridRow = styled.div`
@@ -46,11 +46,11 @@ const GridRow = styled.div`
   display: grid;
   grid-template-columns: subgrid;
   grid-template-rows: subgrid;
-  border-radius: 10px;
+  border-radius: 0.7rem;
   background-color: var(--row-color);
   cursor: pointer;
   transition: background-color 0.2s ease;
-  padding: 2px 4px;
+  padding: 0.1rem 0.3rem;
 
   &:hover {
     background-color: var(--highlight-color);
@@ -58,7 +58,7 @@ const GridRow = styled.div`
 `;
 
 const RowCell = styled.span`
-  padding: 5px 12px;
+  padding: 0.3rem 0.8rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

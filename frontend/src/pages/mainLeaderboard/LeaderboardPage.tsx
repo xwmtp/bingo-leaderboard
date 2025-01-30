@@ -57,34 +57,29 @@ const LeaderboardPageDiv = styled.div`
   width: 100%;
   flex-grow: 1;
   justify-content: center;
-  column-gap: 50px;
-  padding: 0 20px;
-
-  @media screen and (max-width: 768px) {
-    font-size: 10px;
-    padding: 0 8px;
-  }
+  column-gap: 3.3rem;
+  padding: 0 1.3rem;
 `;
 
 const ContentLeft = styled.div`
   display: flex;
   flex-grow: 1.3;
-  max-width: 770px;
+  max-width: 52rem;
 `;
 
 const ContentRight = styled.div`
   display: flex;
   flex-grow: 1;
-  max-width: 650px;
+  max-width: 44rem;
 
-  @media screen and (max-width: 1000px) {
+  @media (max-width: 1000px) {
     display: none;
   }
 `;
 
 const NoDataDiv = styled.div`
   display: flex;
-  margin-top: 100px;
+  margin-top: 7rem;
   height: 100%;
 `;
 
