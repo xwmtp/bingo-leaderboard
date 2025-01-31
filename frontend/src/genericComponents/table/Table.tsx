@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {useSortedEntries} from "./sort/useSortedEntries.ts";
 import {TableHeader} from "./TableHeader.tsx";
 import {RowDataWithIndex, TableData} from "./TableTypes.ts";
+import {Colors} from "../../style/GlobalStyle.tsx";
 
 interface Props<TRowData extends RowDataWithIndex> {
   tableData: TableData<TRowData>;
@@ -47,13 +48,13 @@ const GridRow = styled.div`
   grid-template-columns: subgrid;
   grid-template-rows: subgrid;
   border-radius: 0.7rem;
-  background-color: var(--row-color);
+  background-color: ${Colors.rowColor};
   cursor: pointer;
   transition: background-color 0.2s ease;
   padding: 0.1rem 0.3rem;
 
   &:hover {
-    background-color: var(--highlight-color);
+    background-color: ${Colors.highlightColor};
   }
 `;
 

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {Colors} from "../style/GlobalStyle.tsx";
 
 export const Spinner: React.FC<{size?: "normal" | "small"}> = ({size}) => {
   if (size === "small") {
@@ -22,10 +23,10 @@ const SpinnerRegular = styled.div`
     position: relative;
     text-indent: -9999em;
     --spinner-thickness-normal: 0.45rem;
-    border-top: var(--spinner-thickness-normal) solid var(--highlight-color);
-    border-right: var(--spinner-thickness-normal) solid var(--highlight-color);
-    border-bottom: var(--spinner-thickness-normal) solid var(--highlight-color);
-    border-left: var(--spinner-thickness-normal) solid var(--blue);
+    border-top: var(--spinner-thickness-normal) solid ${Colors.highlightColor};
+    border-right: var(--spinner-thickness-normal) solid ${Colors.highlightColor};
+    border-bottom: var(--spinner-thickness-normal) solid ${Colors.highlightColor};
+    border-left: var(--spinner-thickness-normal) solid ${Colors.blue};
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
     transform: translateZ(0);
@@ -64,9 +65,9 @@ const SpinnerSmall = styled(SpinnerRegular)`
 
   & {
     --spinner-thickness-small: 0.3rem;
-    border-top: var(--spinner-thickness-small) solid var(--highlight-color);
-    border-right: var(--spinner-thickness-small) solid var(--highlight-color);
-    border-bottom: var(--spinner-thickness-small) solid var(--highlight-color);
-    border-left: var(--spinner-thickness-small) solid var(--blue);
+    border-top: var(--spinner-thickness-small) solid ${Colors.highlightColor};
+    border-right: var(--spinner-thickness-small) solid ${Colors.highlightColor};
+    border-bottom: var(--spinner-thickness-small) solid ${Colors.highlightColor};
+    border-left: var(--spinner-thickness-small) solid ${Colors.blue};
   }
 `;

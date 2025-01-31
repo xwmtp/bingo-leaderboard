@@ -1,5 +1,16 @@
 import {createGlobalStyle} from "styled-components";
 
+export const Colors = {
+  bgColor: "#111111",
+  rowColor: "#222222",
+  highlightColor: "#333333",
+  textColor: "#bec7d2",
+  orange: "#e09456",
+  blue: "#3c70df",
+  darkBlue: "#0a2353",
+  yellow: "#f7e279",
+} as const;
+
 export const ScreenWidths = {
   smallPhone: 425,
   phone: 550,
@@ -37,13 +48,13 @@ export const GlobalStyle = createGlobalStyle`
     body {
         height: 100%;
         width: 100%;
-        background-color: var(--bg-color);
-        color: var(--text-color);
+        background-color: ${Colors.bgColor};
+        color: ${Colors.textColor};
         font-family: 'Roboto', Helvetica, Arial, sans-serif;
     }
 
     h1, h2, h3 {
-        color: var(--orange);
+        color: ${Colors.orange};
     }
 
     a:link, a:visited, a:hover, a:active {

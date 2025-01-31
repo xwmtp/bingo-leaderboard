@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import {Colors} from "../../style/GlobalStyle.tsx";
 
 export const AboutPage: React.FC = () => {
   return (
@@ -110,7 +111,7 @@ const AboutDiv = styled.div`
   flex-direction: column;
   line-height: 1.3;
   a {
-    color: var(--yellow);
+    color: ${Colors.yellow};
     font-weight: bold;
     text-decoration: none;
   }
@@ -128,6 +129,6 @@ const AboutDiv = styled.div`
     font-weight: bold;
   }
   h3 {
-    color: var(--orange);
+    color: ${Colors.orange};
   }
 `;

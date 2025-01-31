@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import {Colors} from "../style/GlobalStyle.tsx";
 
 export const Footer: React.FC = () => {
   return (
@@ -39,6 +40,6 @@ const FooterDiv = styled.div`
     text-decoration: none;
   }
   a:hover {
-    color: var(--text-color);
+    color: ${Colors.textColor};
   }
 `;

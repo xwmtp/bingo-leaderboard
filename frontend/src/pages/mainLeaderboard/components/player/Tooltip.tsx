@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {Colors} from "../../../../style/GlobalStyle.tsx";
 
 interface WrapperProps {
   children: React.ReactNode;
@@ -32,7 +33,7 @@ const WithTooltipContainer = styled.div`
 const Tooltip = styled.span`
   visibility: hidden;
   width: 13rem;
-  background-color: var(--yellow);
+  background-color: ${Colors.yellow};
   color: black;
   font-weight: normal;
   font-size: 0.9rem;
@@ -53,7 +54,7 @@ const Tooltip = styled.span`
     margin-left: -0.3rem;
     border-width: 0.3rem;
     border-style: solid;
-    border-color: transparent transparent var(--yellow) transparent;
+    border-color: transparent transparent ${Colors.yellow} transparent;
   }
 `;
 

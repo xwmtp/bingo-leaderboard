@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {ScreenWidths} from "../../style/GlobalStyle.tsx";
+import {Colors, ScreenWidths} from "../../style/GlobalStyle.tsx";
 
 export const TableWrapper = styled.div<{$numColumns: number}>`
   display: grid;
@@ -18,12 +18,12 @@ const TableRowBase = styled.div`
 
 export const TableRow = styled(TableRowBase)`
   border-radius: 0.7rem;
-  background-color: var(--row-color);
+  background-color: ${Colors.rowColor};
   cursor: pointer;
   transition: background-color 0.2s ease;
   padding: 0.5rem 0.5rem 0.5rem 1.3rem;
   &:hover {
-    background-color: var(--highlight-color);
+    background-color: ${Colors.highlightColor};
   }
 `;
 
@@ -66,6 +66,6 @@ export const HeaderCell = styled.span`
   user-select: none;
 
   &:hover {
-    color: var(--yellow);
+    color: ${Colors.yellow};
   }
 `;

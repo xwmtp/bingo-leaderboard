@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {PlayerTableBlock} from "./PlayerTableBlock.tsx";
 import {PlayerStats} from "./PlayerStats.tsx";
 import {BingoPlayer} from "./playerData.ts";
+import {Colors} from "../../../../style/GlobalStyle.tsx";
 
 interface Props {
   player?: BingoPlayer;
@@ -67,7 +68,7 @@ const PlayerAnchor = styled.a`
   h2 {
     transition: color 0.2s ease;
     &:hover {
-      color: var(--yellow);
+      color: ${Colors.yellow};
     }
   }
 `;

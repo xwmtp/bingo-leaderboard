@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {LastUpdated} from "./LastUpdated.tsx";
 import {NavLink} from "react-router-dom";
+import {Colors} from "../style/GlobalStyle.tsx";
 
 interface Props {
   dateTime?: string;
@@ -32,7 +33,7 @@ const ContentLeft = styled.div`
 `;
 
 const HeaderDiv = styled.div`
-  background-color: var(--row-color);
+  background-color: ${Colors.rowColor};
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -48,7 +49,7 @@ const Link = styled(NavLink)`
   h2 {
     transition: color 0.2s ease;
     &:hover {
-      color: var(--yellow);
+      color: ${Colors.yellow};
     }
   }
 `;

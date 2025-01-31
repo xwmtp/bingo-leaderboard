@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import {DateTime} from "luxon";
 import {WithTooltip} from "../pages/mainLeaderboard/components/player/Tooltip.tsx";
+import {Colors} from "../style/GlobalStyle.tsx";
 
 interface Props {
   dateTime?: string;
@@ -34,6 +35,6 @@ const LastUpdatedDiv = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 0.9rem;
-  color: var(--text-color);
+  color: ${Colors.textColor};
   opacity: 0.8;
 `;
