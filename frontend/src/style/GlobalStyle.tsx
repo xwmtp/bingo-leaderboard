@@ -35,7 +35,7 @@ export const GlobalStyle = createGlobalStyle`
         font-size: 95%;
 
         @media (max-width: ${ScreenWidths.tablet}px) {
-            font-size: 60%;
+            font-size: 70%;
         }
     }
 

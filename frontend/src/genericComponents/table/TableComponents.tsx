@@ -53,6 +53,7 @@ export const HeaderRow = styled(HeaderRowBase)`
   border-radius: 0.7rem;
   padding: 0.5rem 0.5rem 0.5rem 1.3rem;
   margin-bottom: 0.3rem;
+  font-size: 0.8rem;
 
   @media (max-width: ${ScreenWidths.tablet}px) {
     font-weight: normal;
