@@ -4,6 +4,9 @@ import {Header} from "./genericComponents/Header.tsx";
 import {getBingoLeaderboard} from "./api/bingoLeaderboardApi.ts";
 import {useQuery} from "@tanstack/react-query";
 import {Page} from "./genericComponents/Page.tsx";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 export function App() {
   const leaderboardDataResult = useQuery({

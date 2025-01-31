@@ -40,14 +40,8 @@ const PlayerName: React.FC<{player: BingoPlayer}> = ({player}) => {
 const PlayerDiv = styled.div`
   display: flex;
   flex-direction: column;
-  @media (min-height: 41rem) {
-    position: sticky;
-    top: -10rem;
-  }
-  @media (min-height: 53rem) {
-    position: sticky;
-    top: 3.3rem;
-  }
+  position: sticky;
+  top: 3.3rem;
   align-self: flex-start;
   align-items: center;
   width: 100%;

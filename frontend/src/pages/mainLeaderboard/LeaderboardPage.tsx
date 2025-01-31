@@ -5,6 +5,9 @@ import {BingoLeaderboardData} from "../../api/dataModels/bingoLeaderboardModels.
 import {LeaderboardTable} from "./components/LeaderboardTable.tsx";
 import {getBingoPlayers} from "../../api/bingoLeaderboardApi.ts";
 import {useQuery} from "@tanstack/react-query";
+import {PlayerModal} from "./components/player/PlayerModal.tsx";
+import {useWindowDimensions} from "../../hooks/useWindowDimensions.tsx";
+import {ScreenHeights, ScreenWidths} from "../../style/GlobalStyle.tsx";
 
 interface Props {
   leaderboardData: BingoLeaderboardData;
@@ -23,6 +26,10 @@ export const LeaderboardPage: React.FC<Props> = ({leaderboardData}) => {
       ? playerData.find((player) => player.name === selectedPlayerName)
       : undefined;
 
+  const {width, height} = useWindowDimensions();
+  const isModalMode =
+    width <= ScreenWidths.playerTableCutoff || height <= ScreenHeights.playerTableCutoff;
+
   if (leaderboardData.tableData.rows.length === 0) {
     return (
       <NoDataDiv id="no-data">
@@ -40,9 +47,13 @@ export const LeaderboardPage: React.FC<Props> = ({leaderboardData}) => {
         />
       </ContentLeft>
 
-      <ContentRight id="leaderboard-content-right">
-        <PlayerBlock player={playerTableData} />
-      </ContentRight>
+      {isModalMode ? (
+        <PlayerModal player={playerTableData} onClose={() => setSelectedPlayerName(undefined)} />
+      ) : (
+        <ContentRight id="leaderboard-content-right">
+          <PlayerBlock player={playerTableData} />
+        </ContentRight>
+      )}
     </LeaderboardPageDiv>
   );
 };
@@ -67,10 +78,6 @@ const ContentRight = styled.div`
   display: flex;
   flex-grow: 1;
   max-width: 44rem;
-
-  @media (max-width: 1000px) {
-    display: none;
-  }
 `;
 
 const NoDataDiv = styled.div`

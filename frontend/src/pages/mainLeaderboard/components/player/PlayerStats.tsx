@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {BingoPlayer} from "./playerData.ts";
 import {WithTooltip} from "./Tooltip.tsx";
+import {ScreenWidths} from "../../../../style/GlobalStyle.tsx";
 
 interface Props {
   player: BingoPlayer;
@@ -63,9 +64,9 @@ export const PlayerStats: React.FC<Props> = ({player}) => {
 const Stats = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  column-gap: 1rem;
   width: 100%;
-  padding: 0 1.3rem;
 `;
 
 const StatColumn = styled.div`
@@ -74,6 +75,10 @@ const StatColumn = styled.div`
   max-width: 14rem;
   flex-direction: column;
   justify-content: center;
+
+  @media (max-width: ${ScreenWidths.phone}px) {
+    width: auto;
+  }
 `;
 
 const StatRow = styled.div`
@@ -82,6 +87,7 @@ const StatRow = styled.div`
   justify-content: space-between;
   padding: 0.1rem 0;
   width: 100%;
+  column-gap: 1rem;
   transition: color 0.2s ease;
   &:hover {
     color: white;
