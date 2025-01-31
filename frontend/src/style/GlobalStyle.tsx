@@ -54,8 +54,4 @@ export const GlobalStyle = createGlobalStyle`
     a:link, a:visited, a:hover, a:active {
         text-decoration: none;
     }
-
-    .modal-overlay {
-        background-color: rgb(210, 37, 225); /* Black with 50% opacity */
-    }
 `;

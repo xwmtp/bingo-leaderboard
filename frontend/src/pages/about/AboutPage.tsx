@@ -90,7 +90,7 @@ export const AboutPage: React.FC = () => {
 const RacetimeLink: React.FC = () => {
   return (
     <a href="https://racetime.gg" target="_blank" rel="noreferrer">
-      Racetime.gg
+      racetime.gg
     </a>
   );
 };
@@ -105,8 +105,7 @@ const BingoCardLink: React.FC = () => {
 
 const AboutDiv = styled.div`
   display: flex;
-  width: 70%;
-  max-width: 56rem;
+  max-width: min(56rem, 90vw);
   flex-grow: 1;
   flex-direction: column;
   line-height: 1.3;
@@ -114,8 +113,13 @@ const AboutDiv = styled.div`
     color: ${Colors.yellow};
     font-weight: bold;
     text-decoration: none;
+    &:hover {
+      color: white;
+      transition: color 0.2s ease;
+    }
   }
-  p {
+  p,
+  ul {
     font-size: 1.1rem;
   }
   ul,
