@@ -25,6 +25,9 @@ export const TableRow = styled(TableRowBase)`
   &:hover {
     background-color: ${Colors.highlightColor};
   }
+  @media (max-width: ${ScreenWidths.tablet}px) {
+    padding: 0.7rem 0.5rem 0.7rem 1.3rem;
+  }
 `;
 
 const RowCellBase = styled.div`
