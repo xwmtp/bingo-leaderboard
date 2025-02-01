@@ -21,7 +21,7 @@ const customStyles = {
     bottom: "auto",
     maxWidth: "90vw",
     width: "50rem",
-    maxHeight: "95vh",
+    maxHeight: "85vh",
     minHeight: "min(30rem, 95vh)",
     borderRadius: "0.7rem",
     borderWidth: 0,
@@ -33,15 +33,17 @@ const customStyles = {
 
 export const PlayerModal: React.FC<Props> = ({player, onClose}) => {
   return (
-    <Modal
-      isOpen={!!player}
-      onRequestClose={onClose}
-      contentLabel="Player statistics"
-      style={customStyles}
-    >
-      <PlayerBlock player={player} />
-      <CloseButton onClick={onClose}>╳</CloseButton>
-    </Modal>
+    <>
+      <Modal
+        isOpen={!!player}
+        onRequestClose={onClose}
+        contentLabel="Player statistics"
+        style={customStyles}
+      >
+        <PlayerBlock player={player} />
+        <CloseButton onClick={onClose}>╳</CloseButton>
+      </Modal>
+    </>
   );
 };
 
