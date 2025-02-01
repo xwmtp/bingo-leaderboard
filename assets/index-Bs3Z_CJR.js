@@ -356,7 +356,7 @@ https://fb.me/react-async-component-lifecycle-hooks`)}if(typeof r.getDerivedStat
   color: ${We.yellow};
   top: 0;
   right: 0;
-  padding: 0.5rem 1.2rem;
+  padding: 0.5rem 1.2rem 2rem 2rem;
   font-size: 160%;
   font-weight: bolder;
   background-color: transparent;
