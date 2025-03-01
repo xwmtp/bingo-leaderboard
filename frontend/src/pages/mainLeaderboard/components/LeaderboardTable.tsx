@@ -1,4 +1,4 @@
-import {RowDataWithIndex, TableData} from "../../../genericComponents/table/TableTypes.ts";
+import {TableData} from "../../../genericComponents/table/TableTypes.ts";
 import {useSortedEntries} from "../../../genericComponents/table/sort/useSortedEntries.ts";
 import {TableHeader} from "../../../genericComponents/table/TableHeader.tsx";
 import styled from "styled-components";
@@ -7,16 +7,16 @@ import {
   TableRow,
   TableWrapper,
 } from "../../../genericComponents/table/TableComponents.tsx";
+import {Colors} from "../../../style/GlobalStyle.tsx";
+import {LeaderboardEntry} from "./LeaderboardTypes.ts";
 
-interface Props<TRowData extends RowDataWithIndex> {
-  tableData: TableData<TRowData>;
-  onRowClick?: (row: TRowData) => void;
+interface Props {
+  tableData: TableData<LeaderboardEntry>;
+  selectedPlayerName?: string;
+  onRowClick?: (row: LeaderboardEntry) => void;
 }
 
-export function LeaderboardTable<TRowData extends RowDataWithIndex>({
-  tableData,
-  onRowClick,
-}: Props<TRowData>) {
+export function LeaderboardTable({tableData, selectedPlayerName, onRowClick}: Props) {
   const {sortedEntries, sortConfig, handleSort} = useSortedEntries(tableData);
   const {columns} = tableData;
 
@@ -26,12 +26,16 @@ export function LeaderboardTable<TRowData extends RowDataWithIndex>({
 
       {sortedEntries.map((entry) => {
         return (
-          <TableRowStyled key={entry.index} onClick={() => onRowClick?.(entry)}>
+          <TableRowStyled
+            key={entry.index}
+            onClick={() => onRowClick?.(entry)}
+            $isSelected={selectedPlayerName === entry.name}
+          >
             {columns.map((column) => {
               const data = entry[column.key];
               return (
                 <RowCellStyled key={column.key.toString()}>
-                  {column.format?.(data) ?? data?.toString()}
+                  {column.format?.(data as never) ?? data?.toString()}
                 </RowCellStyled>
               );
             })}
@@ -48,6 +52,8 @@ const TableStyled = styled(TableWrapper)`
   column-gap: 0.4rem;
 `;
 
-const TableRowStyled = styled(TableRow)``;
+const TableRowStyled = styled(TableRow)<{$isSelected: boolean}>`
+  background-color: ${({$isSelected}) => ($isSelected ? Colors.highlightColor : "auto")};
+`;
 
 const RowCellStyled = styled(RowCell)``;

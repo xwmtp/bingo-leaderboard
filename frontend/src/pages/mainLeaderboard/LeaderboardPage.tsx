@@ -44,6 +44,7 @@ export const LeaderboardPage: React.FC<Props> = ({leaderboardData}) => {
         <LeaderboardTable
           tableData={leaderboardData.tableData}
           onRowClick={(row) => setSelectedPlayerName(row.name)}
+          selectedPlayerName={selectedPlayerName}
         />
       </ContentLeft>
 
