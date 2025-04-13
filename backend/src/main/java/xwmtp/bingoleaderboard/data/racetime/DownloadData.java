@@ -75,7 +75,7 @@ public class DownloadData {
             newResults = racesPage.getRaces().stream()
                     .filter(r -> r.isValidBingoResultFor(userId))
                     .map(r -> new Result(r, userId))
-                    .collect(Collectors.toList());
+                    .toList();
             results.addAll(newResults);
             page++;
         } while (page <= numPages && results.size() < maxResults && results.size() < ranking.getTimesRaced());
@@ -89,10 +89,9 @@ public class DownloadData {
         try {
             String racetimeRacesData = getRequest("https://racetime.gg/user/" + userId + "/races/data?show_entrants=true&per_page=25&page=" + page);
 
-            RacetimeRacesPage racesPage = gson.fromJson(racetimeRacesData, RacetimeRacesPage.class);
-            return racesPage;
+            return gson.fromJson(racetimeRacesData, RacetimeRacesPage.class);
         } catch (IOException | InterruptedException e) {
-            logger.error("While retrieving Racetime data for player with id {}: {}", userId, e);
+            logger.error("While retrieving Racetime data for player with id {}", userId, e);
             return new RacetimeRacesPage() {
             };
         }
