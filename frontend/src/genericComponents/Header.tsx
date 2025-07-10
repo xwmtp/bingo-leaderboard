@@ -10,7 +10,7 @@ interface Props {
 
 export const Header: React.FC<Props> = ({dateTime}) => {
   return (
-    <HeaderDiv>
+    <HeaderStyled>
       <ContentLeft>
         <Link to="/bingo-leaderboard">
           <h1>OoT Bingo Leaderboard</h1>
@@ -21,7 +21,7 @@ export const Header: React.FC<Props> = ({dateTime}) => {
       <Link to="/bingo-leaderboard/about">
         <h2>About</h2>
       </Link>
-    </HeaderDiv>
+    </HeaderStyled>
   );
 };
 
@@ -32,7 +32,7 @@ const ContentLeft = styled.div`
   align-items: flex-start;
 `;
 
-const HeaderDiv = styled.div`
+const HeaderStyled = styled.header`
   background-color: ${Colors.rowColor};
   width: 100%;
   display: flex;

@@ -4,7 +4,7 @@ import {Colors} from "../style/GlobalStyle.tsx";
 
 export const Footer: React.FC = () => {
   return (
-    <FooterDiv id="footer">
+    <FooterStyled id="footer">
       <p>
         <a href="https://ootbingo.github.io/bingo" target="_blank" rel="noreferrer">
           OoT Bingo
@@ -14,11 +14,11 @@ export const Footer: React.FC = () => {
           racetime.gg leaderboard
         </a>
       </p>
-    </FooterDiv>
+    </FooterStyled>
   );
 };
 
-const FooterDiv = styled.div`
+const FooterStyled = styled.footer`
   width: 100%;
   font-size: 0.9rem;
   display: flex;

@@ -39,7 +39,7 @@ export const LeaderboardPage: React.FC<Props> = ({leaderboardData}) => {
   }
 
   return (
-    <LeaderboardPageDiv id="leaderboard-page">
+    <Leaderboard id="leaderboard-page">
       <ContentLeft id="leaderboard-content-left">
         <LeaderboardTable
           tableData={leaderboardData.tableData}
@@ -55,11 +55,11 @@ export const LeaderboardPage: React.FC<Props> = ({leaderboardData}) => {
           <PlayerBlock player={playerTableData} />
         </ContentRight>
       )}
-    </LeaderboardPageDiv>
+    </Leaderboard>
   );
 };
 
-const LeaderboardPageDiv = styled.div`
+const Leaderboard = styled.main`
   display: flex;
   flex-direction: row;
   width: 100%;

@@ -4,7 +4,7 @@ import {Colors} from "../../style/GlobalStyle.tsx";
 
 export const AboutPage: React.FC = () => {
   return (
-    <AboutDiv id="about">
+    <About id="about">
       <h1>About</h1>
       <p>
         This is a leaderboard for Ocarina of Time Bingo. It only takes into account races that took
@@ -83,7 +83,7 @@ export const AboutPage: React.FC = () => {
         before the slash shows the finished races, the number behind the total amount. If a player
         completed more than 15 Bingo races in total, the second number should always show 15.
       </p>
-    </AboutDiv>
+    </About>
   );
 };
 
@@ -103,7 +103,7 @@ const BingoCardLink: React.FC = () => {
   );
 };
 
-const AboutDiv = styled.div`
+const About = styled.div`
   display: flex;
   max-width: min(56rem, 90vw);
   flex-grow: 1;
