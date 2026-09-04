@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class LeaderboardManager {
+
     private static final Logger logger = LoggerFactory.getLogger(LeaderboardManager.class);
     private static final int MAX_RESULTS = 15;
     private static final int DROP_RESULTS = 3;
@@ -44,9 +45,9 @@ public class LeaderboardManager {
 
     List<LeaderboardEntry> makeLeaderboardEntries(List<LeaderboardPlayer> players) {
         return players.stream()
-                .map(LeaderboardPlayer::getLeaderboardEntry)
-                .sorted(Comparator.comparing(LeaderboardEntry::getLeaderboardTime))
-                .collect(Collectors.toList());
+                   .map(LeaderboardPlayer::getLeaderboardEntry)
+                   .sorted(Comparator.comparing(LeaderboardEntry::getLeaderboardTimeAsDuration))
+                   .collect(Collectors.toList());
     }
 
     @Scheduled(cron = "0 0 9 * * ?", zone="UTC")

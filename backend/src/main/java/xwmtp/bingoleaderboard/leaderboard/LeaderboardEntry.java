@@ -2,6 +2,8 @@ package xwmtp.bingoleaderboard.leaderboard;
 
 import xwmtp.bingoleaderboard.data.Player;
 
+import java.time.Duration;
+
 import static xwmtp.bingoleaderboard.util.Durations.formatDuration;
 
 public class LeaderboardEntry {
@@ -11,6 +13,7 @@ public class LeaderboardEntry {
     private final int racetimePoints;
     private final int leaderboardScore;
     private final String leaderboardTime;
+    private final Duration leaderboardTimeAsDuration;
     private final String average;
     private final String effectiveAverage;
     private final String effectiveMedian;
@@ -26,7 +29,8 @@ public class LeaderboardEntry {
         playerId = player.getId();
         racetimePoints = player.getPoints();
         leaderboardScore = player.leaderboardScore(numDropped, numMax);
-        leaderboardTime = formatDuration(player.leaderboardTime(numDropped, numMax));
+        leaderboardTimeAsDuration = player.leaderboardTime(numDropped, numMax);
+        leaderboardTime = formatDuration(leaderboardTimeAsDuration);
         effectiveMedian = formatDuration(player.effectiveMedian());
         average = formatDuration(player.average());
         effectiveAverage = formatDuration(player.effectiveAverage(numDropped, numMax));
@@ -74,6 +78,10 @@ public class LeaderboardEntry {
         return leaderboardTime;
     }
 
+    public Duration getLeaderboardTimeAsDuration() {
+        return leaderboardTimeAsDuration;
+    }
+
     public int getLeaderboardScore() {
         return leaderboardScore;
     }
@@ -103,5 +111,4 @@ public class LeaderboardEntry {
     public String getFinishedRacesFraction() {
         return finishedRacesFraction;
     }
-
 }
