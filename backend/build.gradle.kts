@@ -1,11 +1,11 @@
 plugins {
-    id("org.springframework.boot") version "2.7.12"
-    id("io.spring.dependency-management") version "1.1.0"
+    id("org.springframework.boot") version "4.1.1"
+    id("io.spring.dependency-management") version "1.1.7"
     java
 }
 
 group = "xwmtp"
-version = "1.0-SNAPSHOT"
+version = "1.0.1-SNAPSHOT"
 
 tasks.withType<Jar> {
     archiveBaseName.set("bingo-leaderboard")
@@ -17,15 +17,14 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-security")
+
     implementation("org.springframework.boot:spring-boot-starter-web")
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(module = "junit-vintage-engine")
-    }
-    implementation("com.google.code.gson:gson:2.8.9")
-    testImplementation(platform("org.junit:junit-bom:5.7.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.assertj:assertj-core:3.16.1")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+
+    implementation("com.google.code.gson:gson:2.14.0")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.assertj:assertj-core:3.27.7")
 }
 
 tasks.withType<Test> {
