@@ -1,6 +1,5 @@
 package xwmtp.bingoleaderboard.leaderboard;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import xwmtp.bingoleaderboard.data.Player;
 import xwmtp.bingoleaderboard.data.racetime.DownloadData;
@@ -9,6 +8,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -33,7 +33,7 @@ class LeaderboardManagerTest {
                 .map(LeaderboardPlayer::getId)
                 .collect(Collectors.toList());
 
-        Assertions.assertThat(ids).containsExactly("a", "c", "d");
+        assertThat(ids).containsExactly("a", "c", "d");
     }
 
     private Player playerWithFinishedRaceCount(String id, int races) {
@@ -46,11 +46,12 @@ class LeaderboardManagerTest {
     @Test
     void makeLeaderboardEntriesSortsCorrectly() {
         final List<LeaderboardPlayer> testPlayers = List.of(
-                LeaderboardPlayerWithLeaderboardTime("a", "1:14:21"),
-                LeaderboardPlayerWithLeaderboardTime("b", "1:02:58"),
-                LeaderboardPlayerWithLeaderboardTime("c", "0:00:00"),
-                LeaderboardPlayerWithLeaderboardTime("d", "2:48:11"),
-                LeaderboardPlayerWithLeaderboardTime("e", "1:37:02")
+            LeaderboardPlayerWithLeaderboardTime("a", Duration.parse("PT1H14M21S")),
+            LeaderboardPlayerWithLeaderboardTime("b", Duration.parse("PT1H02M58S")),
+            LeaderboardPlayerWithLeaderboardTime("c", Duration.parse("PT0H00M00S")),
+            LeaderboardPlayerWithLeaderboardTime("d", Duration.parse("PT2H48M11S")),
+            LeaderboardPlayerWithLeaderboardTime("e", Duration.parse("PT1H37M02S")),
+            LeaderboardPlayerWithLeaderboardTime("f", Duration.parse("PT10H00M00S"))
         );
 
         final List<String> ids = leaderboardManager.makeLeaderboardEntries(testPlayers)
@@ -58,13 +59,12 @@ class LeaderboardManagerTest {
                 .map(LeaderboardEntry::getPlayerId)
                 .collect(Collectors.toList());
 
-        Assertions.assertThat(ids).containsExactly("c", "b", "a", "e", "d");
-
+        assertThat(ids).containsExactly("c", "b", "a", "e", "d", "f");
     }
 
-    private LeaderboardPlayer LeaderboardPlayerWithLeaderboardTime(String id, String formattedLeaderboardTime) {
+    private LeaderboardPlayer LeaderboardPlayerWithLeaderboardTime(String id, Duration leaderboardTime) {
         final LeaderboardEntry leaderboardEntry = mock(LeaderboardEntry.class);
-        when(leaderboardEntry.getLeaderboardTime()).thenReturn(formattedLeaderboardTime);
+        when(leaderboardEntry.getLeaderboardTimeAsDuration()).thenReturn(leaderboardTime);
         when(leaderboardEntry.getPlayerId()).thenReturn(id);
 
         final LeaderboardPlayer leaderboardPlayer = mock(LeaderboardPlayer.class);
@@ -72,5 +72,4 @@ class LeaderboardManagerTest {
         when(leaderboardPlayer.getLeaderboardEntry()).thenReturn(leaderboardEntry);
         return leaderboardPlayer;
     }
-
 }

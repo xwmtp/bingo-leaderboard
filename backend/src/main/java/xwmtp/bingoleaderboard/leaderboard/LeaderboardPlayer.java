@@ -2,7 +2,6 @@ package xwmtp.bingoleaderboard.leaderboard;
 
 import xwmtp.bingoleaderboard.data.Player;
 import xwmtp.bingoleaderboard.data.Result;
-import xwmtp.bingoleaderboard.util.Durations;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -22,8 +21,8 @@ public class LeaderboardPlayer {
         leaderboardEntry = entry;
         int numConsidered = player.racesLimit(dropResults, numMax);
         List<Result> sortedResults = player.getResults().stream()
-                .sorted(Comparator.comparing(Result::timePenalizedByAge))
-                .collect(Collectors.toList());
+                                         .sorted(Comparator.comparing(Result::timePenalizedByAge))
+                                         .toList();
         List<LeaderboardResult> resultsNonDropped = sortedResults.stream()
                 .limit(numConsidered)
                 .map(p -> new LeaderboardResult(p, false))
