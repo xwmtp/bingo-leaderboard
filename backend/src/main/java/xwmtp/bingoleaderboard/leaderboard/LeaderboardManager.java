@@ -1,5 +1,6 @@
 package xwmtp.bingoleaderboard.leaderboard;
 
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -7,8 +8,9 @@ import org.springframework.stereotype.Component;
 import xwmtp.bingoleaderboard.data.Player;
 import xwmtp.bingoleaderboard.data.racetime.DownloadData;
 
-import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component

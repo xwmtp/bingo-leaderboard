@@ -1,10 +1,10 @@
-FROM eclipse-temurin:21-alpine as backend
+FROM eclipse-temurin:25-alpine as backend
 COPY backend .
 COPY gradle gradle/
 COPY gradlew .
 RUN ./gradlew build -x test
 
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:25-jre-alpine
 
 COPY --from=backend build/libs/bingo-leaderboard.jar /usr/bin
 
